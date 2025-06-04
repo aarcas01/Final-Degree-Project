@@ -1,0 +1,2192 @@
+\documentclass[11pt]{report}
+
+% Codificación y lenguaje
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+% Paquetes para la bibliografía
+\usepackage[backend=biber,style=authoryear,natbib=true]{biblatex}
+\addbibresource{tfg.bib}
+
+% Paquetes matemáticos y gráficos
+\usepackage{graphicx, subfigure}
+\usepackage{bbm, amsmath}
+\usepackage{amsfonts, amssymb}  % Fuentes matemáticas
+\usepackage{tablefootnote}
+\usepackage{booktabs}
+
+% Paquete para citas y epígrafes
+\usepackage{csquotes}
+\usepackage{epigraph}
+
+% Paquete para notas a pie de tabla
+\DeclareSymbolFont{newfont}{OML}{cmm}{m}{it}
+
+% Posicionamiento absoluto (para títulos y otros elementos)
+\usepackage[absolute]{textpos}
+
+% Enlaces y referencias
+\usepackage[colorlinks=true, allcolors=blue]{hyperref} 
+\usepackage{cleveref}
+\crefname{table}{Cuadro}{Cuadros}
+\crefname{equation}{Ecuación}{Ecuaciones}
+\crefname{figure}{Figura}{Figuras}
+\crefname{section}{sección}{secciones}
+
+% Espaciado entre líneas
+\renewcommand{\baselinestretch}{1.25} % Interlineado 1.25
+
+% Separación de párrafos
+\usepackage{parskip} % Añade espacio entre párrafos (doble espacio)
+
+% Márgenes
+\usepackage[left=2.5cm,top=2.5cm,right=2.5cm,bottom=2.5cm]{geometry}
+
+% Fuentes y estilo de texto
+\usepackage{mathptmx}  % Times New Roman para matemáticas
+\usepackage[labelfont={bf},font={small}]{caption}
+\usepackage{titlesec}
+
+% Fuente Times New Roman 12 para todo el cuerpo
+\renewcommand{\rmdefault}{ptm}  % Cambia la fuente a Times New Roman
+\renewcommand{\footnotesize}{\fontsize{10}{12}\selectfont}  % Fuente Times New Roman 10 para las notas a pie de página
+
+% Formato de capítulos usando Palatino
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries\fontfamily{ppl}\selectfont}{}{0pt}{\huge\vspace{-1.5em}}
+\titlespacing*{\chapter}{0pt}{-10pt}{30pt}
+
+% Formato de secciones y subsecciones
+\titleformat{\section}
+  {\normalfont\fontsize{18}{19}\bfseries}{\thesection}{1em}{}
+
+% Formato de subsecciones en cursiva
+\titleformat{\subsection}
+  {\normalfont\itshape\fontsize{13}{14}\bfseries}{\thesubsection}{1em}{}
+
+% Configuración del título
+\title{Final Degree Project}
+\thispagestyle{empty}
+
+% Ambiente para sistemas de ecuaciones
+\newenvironment{sistema}%
+{\left\lbrace\begin{array}{@{}l@{}}}%
+{\end{array}\right.}
+
+% Evitar que el pie de página se separe en otra pagina
+\usepackage[bottom]{footmisc}
+
+% Forzar a que la imagen esté donde toca en el texto
+\usepackage{placeins} 
+
+% Inicio del documento
+\begin{document}
+
+
+\pagenumbering{gobble}
+\onecolumn
+
+\begin{center}
+\textbf{\fontsize{16}{\baselineskip}\selectfont Universidad de Barcelona}
+
+\smallskip
+\textbf{\fontsize{14}{\baselineskip}\selectfont Facultad de Economía y Empresa}
+
+\bigskip
+
+\textit{\fontsize{12}{\baselineskip}\selectfont en colaboración con}
+
+\bigskip
+
+\textbf{\fontsize{16}{\baselineskip}\selectfont Universidad Politécnica de Cataluña}
+
+\smallskip
+\textbf{\fontsize{14}{\baselineskip}\selectfont Facultad de Matemáticas y Estadística}
+\bigskip
+
+\begin{center}
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=4cm]{TFG/Imagenes TFG/UB_logo.png}
+    \end{minipage}
+    \hspace{-3cm}
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=4cm]{TFG/Imagenes TFG/UPC_logo.png}
+    \end{minipage}
+\end{center}
+
+\bigskip
+
+\textbf{\fontsize{22}{\baselineskip}\selectfont  Roboadvisors y Mercados Eficientes: Optimización 
+de carteras de Black-Litterman mediante correlaciones 
+estimadas con el estadístico de Gerber}
+
+\bigskip
+
+\bigskip
+
+\bigskip
+
+Trabajo de Fin de Grado presentado para la obtención de los títulos en Economía y Estadística
+
+\bigskip
+
+\bigskip
+
+\textit{\textbf{\fontsize{16}{\baselineskip}\selectfont Elaborado por}}
+
+\bigskip
+
+\textbf{\fontsize{16}{\baselineskip}\selectfont Alejandro Arcas Alberti}
+
+\bigskip
+
+\bigskip
+
+\bigskip
+
+\textit{Tutor del proyecto}
+
+\bigskip
+
+Prof. Salvador Torra Porras
+
+\bigskip
+
+\bigskip
+
+\bigskip
+
+{\today}
+\end{center}
+
+\clearpage
+
+\onecolumn
+
+\begin{center}
+
+\textbf{\fontsize{20}{\baselineskip}\selectfont DECLARACIÓN}
+
+\bigskip
+
+\end{center}
+Declaro sinceramente que:
+\begin{enumerate}
+      \item Soy el único autor de este informe del proyecto.
+      \item Toda la información contenida en este informe es cierta y correcta según mi leal saber y entender.
+      \item Declaro que el informe presentado es original, excepto en los materiales fuente explícitamente reconocidos.
+      \item También reconozco que estoy al tanto de las Normas sobre el Manejo de la Deshonestidad Académica Estudiantil y del Reglamento de Disciplina Estudiantil de la Universitat de Barcelona y de la Universitat Politècnica de Catalunya.
+\end{enumerate}
+
+\bigskip
+
+\bigskip
+
+\bigskip
+
+Nombre: Alejandro Arcas Alberti
+
+\bigskip
+
+\bigskip
+
+Número de estudiante: 20255620
+
+\bigskip
+
+\bigskip
+
+Fecha: {\today} 
+
+\bigskip
+
+\bigskip
+
+Firma: 
+
+\bigskip
+
+\includegraphics[width=2cm]{TFG/Imagenes TFG/Firma Alex Arcas.png}
+
+\clearpage
+
+\shipout\null
+
+\textbf{\fontsize{19}{\baselineskip}\selectfont Resumen} \\
+
+Este trabajo analiza la teoría del mercado eficiente, así como sus principales críticas y contraargumentos. Se define y detalla las diferencias entre la gestión activa y pasiva, destacando su relación con las implicaciones prácticas de esta teoría. Por otro lado, se define el concepto de roboadvisor como un gestor automatizado de gestión de carteras y se muestra su impacto en la dinámica de los mercados financieros. 
+
+Por otro lado, se presentan los modelos de Markowitz y Black-Litterman, así como su procedimiento, ventajas y limitaciones, cetrandose en el segundo modelo, para estudiar la calibración de sus variables.  
+
+En el marco práctico, se construyen diversas carteras basadas en ambos modelos para evaluar su viabilidad y desempeño, compararlas y determinar la cartera óptima, integrando el estadístico de Gerber como herramienta para mejorar la robustez de las estimaciones de las correlaciones.
+
+
+
+\bigskip
+\bigskip
+\bigskip
+
+\textbf{\fontsize{19}{\baselineskip}\selectfont Palabras clave} \\
+
+Teoría de los Mercados Eficientes (EMT), Finanzas Conductuales, Frontera Eficiente, Markowitz, Black-Litterman, Estadístico de Gerber, Portafolio, Ratio de Sharpe.
+
+\bigskip
+\bigskip
+\bigskip
+
+\textbf{\fontsize{19}{\baselineskip}\selectfont Clasificación AMS} \\
+
+97M70 Behavioral and social sciences \\
+
+97M30 Financial and insurance mathematics \\
+
+91G10 Portfolio theory \\
+
+62J10 Analysis of variance and covariance \\
+
+
+\clearpage
+
+\textbf{\fontsize{19}{\baselineskip}\selectfont Abstract} \\
+
+This work analyzes the theory of efficient markets, as well as its main critiques and counterarguments. Furthermore, it analyzes the concept of mean reversion in financial markets and studies portfolio managers' performance versus their benchmark. It defines and details the differences between active and passive management, highlighting their relationship with the practical implications of this theory. Additionally, the concept of roboadvisors is introduced, exploring their impact on financial market dynamics and their role in defining and mitigating behavioral biases and improving decision-making through automation.
+
+Furthermore, the models of Markowitz and Black-Litterman are presented, detailing their procedures, advantages, and limitations. Particular emphasis is placed on the latter model to study the calibration of its key variables, such as market parameters ($\lambda$, $w_m$), investor's views ($P$, $Q$) and confidence levels ($\Omega$), and market equilibrium parameters ($\Pi$, $\Sigma$) with the objective of being analyzed for their influence on portfolio allocation and the efficient frontier.
+
+In the practical framework, portfolios are constructed based on both models to evaluate their feasibility, performance, and sensitivity to input changes. The Gerber statistic is integrated as a tool to enhance robustness in covariance estimation and aiming to reduce the impact of errors derived from historical data. 
+
+Lastly, comparisons between both models are made to identify the most effective approach for achieving optimal portfolio outcomes, combining both with Gerber statistic to determine its feasability and advantages.
+
+\bigskip
+\bigskip
+\bigskip
+
+\textbf{\fontsize{19}{\baselineskip}\selectfont Keywords} \\
+
+Efficient Market Theory (EMT), Behavioral Finance, Efficient Frontier, Markowitz, Black-Litterman, Gerber Statistic, Portfolio, Sharpe Ratio.
+
+\bigskip
+\bigskip
+\bigskip
+
+\clearpage
+
+\textbf{\fontsize{19}{\baselineskip}\selectfont Agradecimientos} 
+
+\bigskip
+\bigskip
+
+Mi más sincero agradecimiento a mi tutor, Salvador Torra Porras, por aportar el título y la idea central de este proyecto, así como por su profundo conocimiento sobre los temas tratados y su guía en cada etapa. Su conocimiento en la materia y sus valiosos consejos han sido fundamentales para dar forma y dirección a este trabajo.
+
+\bigskip
+
+Una especial mención a Jordi Álvarez e Iker Meneses, por su tiempo, consejos e ideas a lo largo de este proyecto.
+
+\bigskip
+
+Por último, expresar mi mayor agradecimiento a mi familia. Por su apoyo incondicional y por haberme acompañado y sostenido en todo momento, incluso cuando este proyecto no les pertenecía. En especial, a mi madre, cuya paciencia y constantes ánimos han sido fundamentales durante estos meses.
+
+\clearpage
+\shipout\null
+\tableofcontents
+\clearpage
+\shipout\null
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\chapter{INTRODUCCIÓN}
+
+\epigraph{\textit{Risk comes from not knowing what you're doing.}}{\textit{Warren Buffett}}
+
+\bigskip
+
+La construcción y gestión de carteras ha sido un tema clave en el mundo de las finanzas durante décadas. A lo largo de los años, diversas teorías y modelos han tratado de optimizar la selección de activos, con el objetivo de maximizar los retornos minimizando el riesgo. Uno de los primeros avances significativos en este campo fue el Modelo de Media-Varianza de Harry Markowitz \cite{markowitz1952}, que introdujo el concepto de diversificación eficiente. Este modelo sentó las bases de la teoría moderna de carteras, proponiendo una frontera eficiente donde los inversores racionales pueden elegir carteras en función de su aversión al riesgo.
+
+Posteriormente, el concepto de mercados eficientes, formalizado por Eugene Fama \cite{fama1970}, dio lugar a la \textit{Efficient Market Theory (EMT)}. Este marco plantea que, en mercados eficientes, la gestión activa tiene un potencial limitado para generar retornos superiores al mercado, sugiriendo que la estrategia más racional sería optar por una gestión pasiva.
+
+Sin embargo, la práctica financiera ha demostrado ciertas ineficiencias y anomalías que han dado pie a la propuesta de nuevos modelos de gestión, siendo uno de ellos el modelo Black-Litterman, desarrollado en los años 90, que combina las creencias del inversor con la información de mercado para mejorar la asignación de activos, mejorando los resultados que presentaba el modelo de Markowitz. Este enfoque más flexible permite a los inversores incorporar sus expectativas subjetivas y ajustarlas según su nivel de confianza, y posteriormente evaluar el rendimiento de la cartera construida respecto a la del mercado.
+
+\subsection{Objetivos}
+
+Este trabajo tiene como objetivo profundizar en la teoría del mercado eficiente (EMT) y aplicar los modelos de Markowitz y Black-Litterman, centrándose en su implementación práctica en la construcción de carteras. Se realizarán análisis comparativos de ambos modelos, con un enfoque especial en el segundo, con el objetivo de evaluar su viabilidad de implementación, su aplicación práctica, su comparación con la cartera de mercado y explorar potenciales mejoras mediante herramientas avanzadas.
+
+\subsection{Motivación}
+
+Detrás de la elaboración de este trabajo se encuentra el objetivo del autor de expandir su proyecto personal, que busca desarrollar un algoritmo automatizado para la valoración de activos. El propósito es crear una metodología que le permita generar $\alpha$ de manera eficiente, minimizando el esfuerzo en el análisis técnico y en el rendimiento histórico de los activos y, en su lugar, centrándose en profundizar en el conocimiento de los activos subyacentes de su interés para poder optimizar la gestión de la cartera.
+
+\subsection{Habilidades adquiridas}
+
+Durante el desarrollo de este trabajo, el autor ha adquirido una variedad de habilidades tanto técnicas como analíticas provenientes de ambos grados, que le han permitido abordar los desafíos del proyecto de manera eficiente. Primeramente, el autor ha podido aprender en profundidad el modelo de Markowitz y Black-Litterman, así como mejorar sus conocimientos de programación, especialmente en la automatización de procesos y funciones. Además, ha mejorado sus habilidades de interpretación y análisis de resultados. Por otro lado, el autor ha adquirido un conocimiento más profundo de una gran variedad de conceptos económicos, como la teoría del mercado eficiente (EMT), el concepto de reversión a la media y la relevancia de los roboadvisors en los mercados financieros.
+
+\clearpage
+
+\chapter{MARCO TEÓRICO}
+\epigraph{\textit{We simply are fearful when others are greedy and greedy when others are fearful.}}{\textit{Warren Buffett}}
+
+\section{Efficient Market Theory} \label{Efficient Market Theory}
+
+La \textit{Efficient Market Theory (EMT)}, o Teoría de los Mercados Eficientes\footnote{De este punto en adelante se emplearán indistintamente los conceptos \textit{Efficient Market Theory} (\textit{EMT}) o Teoría de los Mercados Eficientes, refiriéndose en todos los casos al mismo concepto.}, fue una teoría de valoración de activos popularizada en los años 70 por Eugene Fama \cite{fama1970}. Esta teoría sostiene que, en cuanto la información se hace pública, se difunde rápidamente entre los inversores y se refleja inmediatamente en los precios de los activos. Por lo tanto, los precios de mercado representan el valor intrínseco de los activos, lo que implica que ningún análisis, ni técnico ni fundamental, permitirá obtener \textit{excess returns}\footnote{Este concepto se refiere a un rendimiento superior al del mercado asumiendo un riesgo similar, es decir, generando $\alpha$.} de manera consistente, y, en el caso de que exista, estos retornos serán espurios y se deberán a inversiones altamente especulativas (con alto riesgo).  \\
+
+Este concepto se puede ilustrar con la siguiente historia:
+
+\begin{displayquote}
+Un estudiante y un profesor se encuentran un billete de 100\$ en el suelo. Cuando el estudiante se agacha para recogerlo, el profesor le dice: "No te agaches, si de verdad fueran 100\$ no estarían en el suelo"\footnote{Ver \cite{fama1970}.}.
+\end{displayquote}
+
+En este ejemplo se refleja perfectamente la eficiencia de mercado, pues según la EMT no es posible que haya arbitraje en un mercado eficiente, por lo que si aparece una oportunidad, esta no dará mejores rendimientos que el mercado y, por ende, será subóptima.
+
+En consecuencia, la única estrategia lógica para los inversores sería invertir de manera pasiva, es decir, replicar el comportamiento del mercado en su conjunto.  \\
+
+Respecto a la teoría, Fama sostiene que existen 3 formas de mercados eficientes\footnote{La forma fuerte incluye tanto la semifuerte como la débil, y la forma semifuerte incluye la débil, pero no ocurre lo contrario.}: 
+
+\begin{enumerate}
+    \item Forma débil: Sostiene que los precios actuales reflejan toda la información contenida en los precios históricos, lo que implica que el análisis técnico no puede generar retornos superiores al mercado.
+    \item Forma semifuerte: Afirma que los precios incorporan toda la información pública disponible, de modo que ningún inversor puede obtener ganancias extraordinarias utilizando solo esta información.
+    \item Forma fuerte: Sostiene que los precios reflejan toda la información, incluida la privilegiada, lo que significa que ni siquiera los \textit{insiders} pueden obtener retornos anormales.
+\end{enumerate}
+
+Para determinar el valor intrínseco de los activos y, por ende, sus precios, se utiliza un modelo básico de flujos de caja descontados. Este modelo parte de la premisa de que el precio del activo en el día \textit{t} debe reflejar el valor presente de los dividendos futuros esperados traídos a valor presente mediante una tasa de descuento \textit{r}, lo cual se expresa en la siguiente fórmula\footnote{Tal y como se puede deducir de la fórmula, si la EMT se sostiene, las empresas con dividendos elevados respecto a su precio deberían mostrar, en el largo plazo, incrementos en el dividendo como fracción del precio actual.} \footnote{Siendo $P_t$ el precio del activo en el momento $t$, $E_t$ la expectativa condicional en el tiempo $t$, $D_{t+k}$ el dividendo esperado en el momento $t+k$ y $r$ la tasa de descuento.}:
+
+\begin{equation}
+P_t = E_t \sum_{k=0}^{\infty} \frac{D_{t+k}}{(1+r)^{k+1}}\label{Modelo Simple Dividendo}
+\end{equation}
+
+Una vez desarrollada la fórmula, cabe preguntarse si, en efecto, existe una relación temporal en el precio. Al buscar dicha relación entre \textit{t} y \textit{t+1}, entendiendo que en \textit{t+1} se conoce más información que en \textit{t}, se concluye que no hay correlación y el precio sigue un ''paseo aleatorio'' (''\textit{random walk}''), hecho que implica que el precio de los activos futuros no está correlacionado con el de los precios actuales, es decir, no tiene memoria\footnote{El concepto de memoria implica que las fluctuaciones de precio en el pasado no tienen relevancia en cómo se comportarán en el futuro.}. Como resultado, la EMT sostiene que cualquier intento de predecir futuros movimientos de precios a partir de datos pasados es ineficaz.
+
+\subsection{Críticas a la EMT}
+
+\subsubsection{Behavioral finance} \label{Behavioral finance}
+Las finanzas conductuales (\textit{Behavioral Finance}) representan una rama de las finanzas que integra conceptos de psicología en el análisis financiero, desafiando la visión tradicional de la racionalidad de los inversores postulada por la EMT. Según Robert Shiller \cite{shiller2013speculative}, este enfoque sostiene que los precios de los activos no siempre reflejan su valor fundamental, ya que los inversores están influenciados por sesgos cognitivos, emociones y comportamientos sociales. Shiller argumenta que fenómenos como las burbujas especulativas y las sobrereacciones del mercado son consecuencia de estos factores irracionales, lo que provoca desviaciones sistemáticas en los precios y genera ineficiencias temporales en los mercados \cite{shiller2000irrational}.
+
+Además, esta teoría sostiene que, debido a la naturaleza arbitraria de la psicología humana, pequeños cambios en el contexto o en el entendimiento del entorno pueden impactar profundamente la conducta de los inversores, alterando los precios de forma irracional y, en consecuencia, ineficiente.
+
+Un ejemplo claro de las finanzas conductuales es la persistencia de inversores que depositan sus ahorros en fondos que, de manera consistente, obtienen rentabilidades menores que el índice de referencia. Si los inversores actuaran de forma lógica, no depositarían sus ahorros en dichos fondos. A pesar de esto, muchos siguen confiando en estos fondos (\textit{Mutual Funds})\footnote{Ver más en \cite{gruber1996}.}, un fenómeno que ha persistido durante décadas sin que se observe un cambio de tendencia significativo.
+
+\FloatBarrier
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{TFG/Imagenes TFG/Survival_Mutual_Funds.png} 
+    \caption{Retornos de los \textit{Mutual Funds} supervivientes vs. S\&P 500, 1970-2001}
+    \label{fig:mutual_funds_survival}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: The Vanguard Group}
+\end{figure} 
+\FloatBarrier
+
+Tal y como se puede apreciar en la \cref{fig:mutual_funds_survival}, tan solo 22 de los 355 fondos que había en 1970 consiguieron rentabilidades superiores al índice de referencia de forma anualizada hasta 2001. Ello implica que, pese a que la mayoría de inversores profesionales no son capaces de batir al mercado, sí que es posible, aunque no probable, tener retornos superiores al índice de forma prolongada en el tiempo.
+
+\subsubsection{Sesgos}\label{Sesgos} 
+A la hora de invertir, existen sesgos que influyen y perjudican la toma de decisiones de los inversores. Estos pueden ser cognitivos o emocionales. \\
+Los sesgos cognitivos son patrones de pensamiento irracional que llevan a los inversores a decisiones erróneas debido a una interpretación inadecuada de la información o al uso de reglas heurísticas\footnote{Los métodos heurísticos son aquellos que, a través de la simplificación o atajos cognitivos, permiten a las personas tomar decisiones o resolver problemas de manera rápida y eficiente, basándose en la experiencia y el conocimiento previo. Estos atajos pueden llevar a errores sistemáticos y sesgos en la toma de decisiones.}. Por otro lado, los sesgos emocionales se originan en reacciones como el miedo o la avaricia, afectando la capacidad de tomar decisiones objetivas. Los principales sesgos cognitivos que afectan a los inversores son:
+
+\begin{itemize}
+\item Exceso de confianza (\textit{Overconfidence bias}): Los inversores tienden a sobreestimar su capacidad para predecir movimientos del mercado, lo que puede llevar a asumir riesgos innecesarios y sobreponderar ciertos activos. Esta tendencia al exceso de confianza también se traduce en un trading excesivo, según \cite{barber2000trading}.
+\item Sesgo de anclaje (\textit{Anchoring bias}): Los inversores suelen depender en exceso de la primera información que reciben (el “ancla”) y utilizan esta como base para sus decisiones futuras, sin ajustar adecuadamente las nuevas informaciones.
+\item Sesgo de retrospectiva (\textit{Hindsight bias}): Tras un evento, los inversores creen que podrían haberlo previsto, lo que genera una falsa confianza en su capacidad predictiva. Esto lleva a sobreestimar la previsibilidad de los mercados y puede derivar en decisiones erróneas en el futuro.
+\item Sesgo de representatividad (\textit{Representativeness bias}): Se da cuando los inversores extrapolan el rendimiento reciente de un activo y creen que será representativo de su rendimiento futuro. Barber y Odean \cite{barber2008} observaron que los inversores suelen reaccionar de manera exagerada a las noticias y a la distribución de dividendos.
+\item Sesgo de disponibilidad (\textit{Availability bias}): Este sesgo se manifiesta cuando los inversores sobrevaloran la importancia de la información más reciente o más accesible, lo que puede llevar a decisiones equivocadas basadas en eventos recientes en lugar de una evaluación objetiva de los riesgos.
+\end{itemize}
+
+Por otro lado, los sesgos emocionales más presentes entre los inversores son:
+
+\begin{itemize}
+\item Sesgo de disposición (\textit{Disposition effect}): Los inversores tienden a vender activos que han generado ganancias, asegurando beneficios, mientras retienen aquellos que han generado pérdidas, con la esperanza de que se recuperen.
+\item Sesgo de status quo (\textit{Status quo bias}): Existe una tendencia a mantener las inversiones actuales, aun cuando las condiciones del mercado justificarían ajustes en la cartera.
+    \begin{itemize}
+        \item Narrow framing: Los inversores evalúan las decisiones de forma aislada, sin considerar su impacto en el contexto general o en el portafolio completo.
+    \end{itemize}
+\itelización (\textit{Home bias}): Los inversores tienden a sobreponderar los activos nacionales en sus carteras, ignorando las oportunidades internacionales. Por ejemplo, Benos y Jochec \cite{benos2013} encontraron que en Estados Unidos, durante períodos de guerra, las acciones que incluían las palabras ``American'' o ``USA'' en su nombre obtenían retornos anormales anualizados del 6\%.
+\end{itemize}
+
+\subsubsection{Otras críticas} \label{Otras críticas}
+Respecto al modelo simple presentado en la \cref{Modelo Simple Dividendo}, Stephen LeRoy y Richard Porter \cite{leroy1981} rechazaron esta hipótesis\footnote{Este efecto fue rechazado para las acciones de los Estados Unidos, segmento del mercado estudiado para la comprobación de la fiabilidad de la EMT.}. Esto se debe a que, si fuera cierta, no tendría sentido la volatilidad del mercado, tal y como se muestra en la \cref{fig:Modelo simple}.
+
+\FloatBarrier
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{TFG/Imagenes TFG/Price forecasting.png} 
+    \caption{Análisis de los retornos del S\&P 500 en comparación con el modelo simple. 1981 como año de inicio de la predicción.}
+    \label{fig:Modelo simple}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: Shiller (2013)}
+\end{figure} 
+\FloatBarrier
+
+Según la EMT, la volatilidad del precio (\(P\)) debería ser menor que la estimación (\(P^*\)), pero es justamente lo contrario, tal y como se muestra en la \cref{fig:Modelo simple}.
+
+Lo y MacKinlay (1999) defienden que las correlaciones seriales de corto plazo no son cero, implicando que existen movimientos en la misma dirección que rechazan la hipótesis de que los precios se mueven en caminatas aleatorias. 
+
+Por otro lado, existe el efecto tamaño (\textit{size effect}), que señala que las empresas de menor capitalización bursátil tienden a generar rendimientos superiores a las grandes empresas, incluso ajustando por riesgo. Esta anomalía parece desafiar la premisa central del cálculo del precio bajo los supuestos de la EMT, ya que no sería posible obtener rendimientos ajustados al riesgo superiores de manera sistemática. \\
+
+El \textit{size effect}\label{Size effect} fue documentado por primera vez por Rolf Banz \cite{banz1981}, quien mostró que, en promedio, las acciones de pequeñas empresas ofrecían rendimientos mayores que las de grandes capitalizaciones. Desde la perspectiva de la EMT, esta anomalía es problemática, ya que los mercados eficientes deberían incorporar rápidamente esta información, eliminando las oportunidades de arbitraje. Sin embargo, la persistencia de este fenómeno a lo largo del tiempo sugiere que los mercados pueden no ser completamente eficientes en cuanto a la capitalización de las empresas.
+ 
+\subsubsection{Contraargumentos a las críticas} \label{Contraargumentos a las críticas}
+
+A pesar de que la EMT se centra en la idea de que los precios de los activos son racionales y reflejan toda la información disponible, Fama sugirió que, aunque el mercado en su conjunto pueda ser eficiente, pueden existir ineficiencias a nivel de acciones individuales, causadas por factores como el comportamiento de los inversores o las restricciones de liquidez. En consecuencia, aunque la EMT pueda ser válida en términos generales, existen casos puntuales donde los precios no reflejan completamente el valor fundamental de un activo.
+
+Respecto a la crítica del \textit{Size Effect}, Malkiel \cite{malkiel2003} argumenta que, aunque este efecto parece contradecir la EMT, podría ser explicado por la presencia de riesgos no capturados por los modelos tradicionales, como el Capital Asset Pricing Model (CAPM). Las empresas de menor capitalización podrían estar expuestas a riesgos adicionales, como menor liquidez o una mayor volatilidad en los flujos de caja, que no son adecuadamente reflejados en los modelos convencionales. En este sentido, los mayores rendimientos de las \textit{small caps} podrían ser una compensación por asumir un riesgo no capturado en modelos simples de valoración.
+
+En cuanto a la crítica del \textit{random walk}, aunque el mercado de valores no siga un camino aleatorio perfecto desde un punto de vista matemático, es importante distinguir entre la significancia estadística y la significancia económica.Odean \cite{odean1999} sugiere que los inversores que siguen estrategias de \textit{momentum}\footnote{El \textit{momentum} es un indicador que mide la fuerza de una tendencia en un activo o la magnitud de un cambio en esta.} no generan $\alpha$. De hecho, ocurre lo contrario: estos inversores obtuvieron resultados peores que aquellos que siguieron una estrategia de \textit{Buy \& Hold}, incluso durante un período en el que había evidencia estadística clara de \textit{momentum} positivo. \\
+
+Lo verdaderamente relevante para cuestionar la validez de la EMT es demostrar la existencia de patrones con correlaciones persistentes a lo largo del tiempo. Como mostró Schwert \cite{schwert2001}, muchos de estos patrones tienden a desaparecer una vez que se publican, dado que los resultados estadísticamente significativos que generaban $\alpha$ dejan de existir cuando otros inversores los identifican.
+
+A pesar de ello, Malkiel sostiene que los mercados pueden ser eficientes incluso si los inversores actúan de manera irracional y aunque los precios de los activos presenten una volatilidad superior a la que estaría justificada por fundamentos como beneficios y dividendos.
+
+En relación con las críticas sobre la volatilidad del precio frente al valor estimado, cuando la EMT sugiere lo contrario, podría argumentarse que los actores del mercado evalúan constantemente la posibilidad de que surja nueva información que modifique los precios y, por ende, buscan anticiparse a un cambio estructural en la evolución del precio, generando así volatilidad adicional. \\
+
+Existen variaciones del modelo simple de valor presente, como el modelo con flexibilidad en el tipo de interés o el modelo basado en el consumo que, a pesar de no ser del todo precisos, representan una mejora. Por otro lado, los defensores de la EMT argumentan que un modelo autorregresivo de expectativas puede demostrar que las fluctuaciones agregadas están dominadas por las expectativas de los retornos futuros. Aunque no estén determinadas exclusivamente por los dividendos, reflejan tanto la información disponible como las expectativas sobre información futura, lo que puede justificar la volatilidad del mercado incluso cuando los fundamentos no lo harían directamente.
+
+Además, respecto a las críticas de las finanzas conductuales, si los precios estuvieran determinados por decisiones irracionales de inversores que no calculan el valor presente de los activos, sería más fácil detectar anomalías en el mercado. Especialmente para inversores expertos y profesionales, quienes podrían generar $\alpha$ para sus partícipes\footnote{Tal y como se ha mostrado en el \cref{tab: EquityFunds_vs_SP500} Equity Funds vs. S\&P 500, esto no sucede en la mayoría de los fondos de inversión}.
+
+\FloatBarrier
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|c|c|c}
+        & 10 years & 15 years & 20 years \\
+        \hline
+        Large Cap Equity Funds & 10.98\% & 11.95\% & 13.42\% \\
+        S\&P 500 Index & 12.94\% & 13.74\% & 15.24\% \\
+    \end{tabular}
+    \caption{Comparación de las rentabilidades medias de los \textit{Large Cap Mutual Funds} vs. S\&P 500}
+    \label{tab: EquityFunds_vs_SP500}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: Lipper Analytic Services, Wilshire Associates, Standard \& Poor’s and The Vanguard Group}
+\end{table}
+\FloatBarrier
+
+Además, tal y como se puede ver en el cuadro \cref{tab: EquityFunds_vs_SP500}, el rendimiento medio de los gestores de inversión profesionales es inferior a los fondos índice que replican el mercado bursátil de manera pasiva. 
+
+\FloatBarrier
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|c|c|c|c}
+        & 1 year & 3 years & 5 years & 10 years \\
+        \hline
+        S\&P 500 vs. Large Cap Equity Funds & 63\% & 56\% & 70\% & 79\% \\
+        Wilshire 5000 vs. Large Cap Equity Funds & 72\% & 64\% & 69\% & 74\% \\
+    \end{tabular}
+    \caption{Porcentaje de \textit{Large Cap Equity Funds} con rendimientos menores al índice de referencia}
+    \label{tab:EquityFunds_vs_Index}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: Lipper Analytic Services, Wilshire Associates, Standard \& Poor’s and The Vanguard Group}
+\end{table}
+\FloatBarrier
+
+Por último, en el \cref{tab:EquityFunds_vs_Index} se muestra como, la mayoría de fondos tienen rendimientos peores que el índice de referencia, hecho que se amplifica on el tiempo. 
+
+\subsection{Reversión a la media} \label{Reversion a la media}
+
+Este fenómeno, fundamental para el entendimiento de la EMT, describe la tendencia de los precios o retornos de los activos financieros a moverse hacia su promedio histórico o valor fundamental a lo largo del tiempo. En otras palabras, después de períodos de rendimientos inusualmente altos o bajos, los precios tienden a ajustarse y acercarse a su media a largo plazo. Un ejemplo de ello es observable en la \cref{fig:Modelo simple}, ya que, a pesar de que el precio puede desviarse en gran medida de su valor intrínseco, a largo plazo siempre retorna a la media. Según Poterba y Summers \cite{poterba1987}, existe una fuerte reversión a la media en los rendimientos del mercado de valores en horizontes temporales largos, hecho que fue validado por Fama y French \cite{fama1988}, quienes encontraron que entre el 25\% y el 40\% de la variación en los rendimientos a largo plazo puede predecirse a partir de una correlación negativa con rendimientos pasados, es decir, una reversión del precio respecto a la tendencia inicial.
+
+\FloatBarrier
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{TFG/Imagenes TFG/Grafico reversion media.jpg} 
+    \caption{Evidencia Empírica de la Reversión a la Media en Portafolios de Ganadores y Perdedores, 1933-1978}
+    \label{fig:Grafico reversión media}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: ''Does the Stock Market Overreact?'' por Werner F. M. De Bondt y Richard Thaler}
+\end{figure}
+\FloatBarrier
+
+La \cref{fig:Grafico reversión media} ilustra cómo los portafolios que fueron ganadores o perdedores en un año determinado tienden a revertir su comportamiento en los siguientes cinco años. En concreto, los portafolios que inicialmente tuvieron un rendimiento superior (ganadores) muestran una tendencia a obtener rendimientos negativos en los años posteriores, mientras que los portafolios que fueron perdedores en el período de formación experimentan una mejora significativa en su rendimiento. Esto demuestra el fenómeno de la reversión a la media\footnote{Este fenómeno no está siempre presente. Tal es el caso actual de las criptomonedas.}. \\
+
+DeBondt y Thaler \cite{deBondtThaler1985} argumentan que los inversores están sujetos a olas de optimismo y pesimismo que hacen que los precios se desvíen sistemáticamente de sus valores fundamentales, para luego experimentar una reversión a la media. Dichas fluctuaciones, en ciertos casos excesivas, pueden resultar en burbujas especulativas. En su libro \textit{Irrational Exuberance}, Shiller \cite{shiller2000irrational} describe este concepto:
+
+\begin{displayquote} \label{Burbujas especulativas}
+Una burbuja especulativa se da en una situación en la que las noticias sobre aumentos de precios generan entusiasmo entre los inversores, el cual se propaga por contagio psicológico de persona a persona, amplificando así las historias que podrían justificar dicho aumento\footnote{Shiller destaca que el término es controvertido, pues se usa para una gran cantidad de situaciones en las que no se debería, siendo pues una epidemia social que se observa regularmente en los mercados especulativos, siendo pues la consecuencia natural de los principios de la psicología social, combinados con medios de comunicación imperfectos y canales de información deficientes.}.
+\end{displayquote}
+
+Por otro lado, Scientific Background \cite{scientific2013} demostró que hay una mayor capacidad de predicción en la especulación a largo plazo que en el corto plazo. Por lo tanto, el valor intrínseco de los activos tenderá a prevalecer a largo plazo, lo que valida una de las ideas centrales de la EMT y la reversión a la media: a largo plazo, los precios tienden a ajustarse al valor real de los activos, confirmando la eficiencia del mercado a largo plazo. Esto sugiere que, si bien pueden existir anomalías o ineficiencias en el corto plazo, el mercado corrige estas distorsiones a medida que pasa el tiempo y se dispone de más información.
+
+\subsection{Argumentos finales} \label{Conclusiones finales}
+
+Es importante destacar que, como se ha mencionado en la \cref{Contraargumentos a las críticas} \hyperref[Contraargumentos a las críticas]{Contraargumentos a las críticas}, los defensores de la EMT reconocen que, en cierta medida, la hipótesis no se cumple en el corto plazo, y que la idea de la paseo aleatorio tiene limitaciones. A pesar de ello, sostienen que en el largo plazo los precios tienden a reflejar la información disponible de manera eficiente, lo que refuerza la validez de la EMT en horizontes temporales más largos. 
+
+El estudio reciente ''The Less-Efficient Market Hypothesis'' de Asness (2023) \cite{asness2023} analiza cómo la eficiencia de los mercados ha disminuido con el tiempo debido a factores como el impacto de nuevas tecnologías y el aumento de la influencia de las redes sociales y los algoritmos de trading. Asness argumenta que, aunque los mercados procesan la información de manera más rápida, esto no significa que los precios reflejen mejor la realidad. La accesibilidad al trading ''gamificado''\footnote{El trading gamificado se refiere a la práctica de hacer que la inversión y el trading se asemejen a un juego mediante interfaces visuales, notificaciones y recompensas psicológicas, promoviendo una mayor participación, pero también decisiones impulsivas y poco informadas.} y la influencia de las redes sociales han llevado a que los inversores minoristas actúen en masa, lo cual reduce la eficiencia del mercado al sincronizarse estas decisiones y generar movimientos descoordinados.
+
+Finalmente, según \cite{Vukovic2024}, es posible identificar patrones predecibles en los mercados financieros mediante redes neuronales LSTM, por lo que los precios no siguen la ''paseo aleatorio'' de la EMT. Estas ineficiencias temporales, conocidas como ''pockets in time'', permiten predecir retornos en ciertos intervalos, desafiando la idea de que los precios reflejan toda la información disponible de forma continua. No obstante, las ineficiencias, a menudo conductuales, tienden a autocorregirse rápidamente, excepto aquellas provocadas por cambios estructurales o shocks externos, las cuales tienden a perdurar en el tiempo, por lo que la EMT no tendría cabida en esos casos. En el artículo defienden un nuevo concepto, la \textit{Adaptive Market Theory}\footnote{La \textit{Adaptive Market Theory} fue introducida por Andrew Lo y combina elementos de la EMT con principios de la biología evolutiva. Propone que los mercados se adaptan a cambios estructurales y que los inversores no siempre actúan de manera completamente racional, sino que ajustan su comportamiento en función de las circunstancias y del entorno financiero.}, la cual se definiría, en pocas palabras, en una flexibilización de la EMT, permitiendo ineficiencias en períodos de alta volatilidad o cambios estructurales como la burbuja de las puntocom, la crisis de 2007-2009 o la pandemia del COVID-19.
+ \\
+
+\clearpage
+\section{Gestión de carteras}
+\subsection{Gestión activa}
+La gestión activa es una estrategia de inversión en la que un gestor o inversor busca superar el rendimiento del mercado mediante la selección discrecional y dinámica de activos, basándose en análisis exhaustivos de factores macroeconómicos, fundamentales y/o técnicos. Los gestores activos toman decisiones sobre la compra y venta de activos en función de sus expectativas sobre el comportamiento futuro del mercado. Entre sus características clave destacan:
+
+\begin{itemize}
+    \item \textbf{Análisis intensivo}: Los inversores activos realizan un análisis profundo de empresas, sectores y tendencias económicas para identificar ineficiencias de mercado, activos infravalorados o con potencial de revalorización.
+    \item \textbf{Adaptabilidad}: Permite a los gestores ajustar la composición de la cartera en respuesta a cambios de mercado o eventos imprevistos, proporcionando una ventaja en entornos volátiles o en cambios estructurales del mercado.
+    \item \textbf{Objetivo de $\alpha$ positivo}: La gestión activa se orienta a generar $\alpha$, es decir, un rendimiento superior al del índice de referencia ajustado al riesgo. Idealmente el gestor buscará generar  $\alpha + g$, siendo $g$ los costes de gestión, para que el inversor obtenga $\alpha$. Generalment se buscaran carteras que optimicen Sharp Ratio para la toma de decisiones. 
+    \item \textbf{Costes elevados}: Siendo esta una desbentaja, debido a la necesidad de investigación continua y la mayor rotación de activos, los costes asociados a la gestión activa son generalmente superiores a los de la gestión pasiva, lo que incluye comisiones más altas y mayores costes transaccionales.
+\end{itemize}
+
+\subsection{Gestión pasiva}
+
+La gestión pasiva es una estrategia de inversión que tiene como objetivo replicar el comportamiento de un índice de mercado, sin intentar superar su rendimiento. Esta gestión se caracteriza por su simplicidad operativa y su orientación a largo plazo, enfocándose en minimizar costos y mantener una exposición constante al mercado, teniendo pues el mismo riesgo sistemático. Las principales características de la gestión pasiva son:
+
+\begin{itemize}
+    \item \textbf{Replicación del índice}: La cartera se estructura para replicar un índice de referencia, como el S\&P 500, eliminando la necesidad de seleccionar activos individuales o tomar decisiones de tiempo de mercado.
+    \item \textbf{Baja rotación de activos}: Dado que el objetivo es replicar las condiciones de mercado \footnote{Usando el S\&P 500 como ejemplo, dado que el índice es ponderado en cuanto a las capitalizaciones de las empresas que lo componen, éste tiene que hacer reponderaciones constantemente, pero de forma automática, lo que permite al inversor invertir pasivamente.}, las transacciones son mínimas, lo que reduce el esfuerzo del inversor.
+    \item \textbf{Costes operativos reducidos}: La ausencia de análisis exhaustivo y la menor rotación implican comisiones de gestión considerablemente más bajas en comparación con la gestión activa. Instrumentos como los ETFs son comunes en la gestión pasiva debido a sus bajas comisiones y eficiencia.
+    \item \textbf{Perspectiva a largo plazo}: Los inversores que adoptan la gestión pasiva tienden a mantener una visión a largo plazo, basándose en la premisa de que, con el tiempo, los mercados tienden a generar rendimientos positivos y superar la volatilidad a corto plazo.
+\end{itemize}
+
+
+\subsubsection{ETFs: Una herramienta de la gestión pasiva} \label{ETFs}
+
+Los ETFs (Exchange Traded Funds) son uno de los instrumentos más empleados en la gestión pasiva. Se trata de fondos que replican el comportamiento de un índice y se negocian en las bolsas de valores como acciones, lo que les permite ofrecer múltiples beneficios a los inversores que buscan una estrategia de bajo coste y con exposición diversificada.
+
+Una de las principales ventajas de los ETFs es su diversificación, ya que un solo ETF permite al inversor obtener exposición a una amplia gama de activos dentro de un índice, reduciendo el riesgo específico de los activos individuales. Al negociarse en mercados secundarios, los ETFs también ofrecen una alta liquidez, lo cual, sumado a la posibilidad de operar con derivados, mejora la eficiencia y flexibilidad en su gestión. \\
+
+En cuanto a costes, los ETFs resultan atractivos para inversores a largo plazo debido a sus comisiones de gestión más bajas en comparación con fondos activos. Además, presentan ventajas fiscales: el proceso de creación y redención en especie minimiza los eventos imponibles, optimizando así la eficiencia fiscal del fondo\footnote{El proceso de creación y redención implica que los \textit{autorizados participantes} (APs), quienes pueden crear o redimir unidades del ETF, ajusten el número de participaciones en respuesta a la demanda. Esto reduce los costos y evita transacciones sujetas a impuestos.}.
+
+No obstante, los ETFs presentan algunos desafíos. Uno de los principales es el \textit{tracking error}, que mide la desviación de la rentabilidad de un ETF respecto a su benchmark. Esta desviación puede deberse a factores como comisiones, costes de transacción o la falta de liquidez. Aunque los gestores intentan minimizarlo, los inversores deben considerar que puede afectar la precisión con la que el ETF replica su índice.
+
+Otro aspecto fundamental en el funcionamiento de los ETFs es el mecanismo de arbitraje, que ayuda a mantener su precio cercano al valor liquidativo (NAV)\footnote{El NAV o \textit{Net Asset Value} representa el valor de los activos netos del fondo dividido entre el número de participaciones en circulación.}. Los APs aprovechan las discrepancias de precio para realizar arbitraje: si el ETF cotiza por encima de su NAV, pueden crear nuevas participaciones a menor coste; si cotiza por debajo, redimen participaciones para reducir la oferta en el mercado. Este proceso contribuye a alinear el precio del ETF con su NAV, aunque puede haber ligeras variaciones, especialmente en ETFs con activos menos líquidos o de distinta zona horaria, donde el \textit{arbitrage gap}\footnote{El \textit{arbitrage gap} describe la diferencia entre el precio de mercado del ETF y su valor liquidativo (NAV) debido a ineficiencias temporales en el mecanismo de arbitraje.} puede ampliarse. \\
+
+Aunque los ETFs ofrecen flexibilidad y eficiencia, no siempre son la opción ideal para grandes inversores institucionales que requieren soluciones más personalizadas o de coste muy bajo, como las cuentas gestionadas separadamente (SMAs)\footnote{Las \textit{Separately Managed Accounts} (SMAs) permiten a grandes inversores una mayor personalización y, en ocasiones, menores costes de gestión que los ETFs.}. En particular, los ETFs especializados, como los ETFs de commodities o acciones de pequeña capitalización, suelen tener \textit{spreads} de compra y venta más amplios, afectando su liquidez y costes operativos.
+
+\subsubsection{Comparativa entre ambas estrategias}
+Existen diferencias fundamentales entre la gestión activa y la pasiva, tanto en su enfoque como en los resultados esperados en términos de riesgo, retorno y coste:
+
+\begin{itemize}
+    \item \textbf{Riesgo}: La gestión activa conlleva un riesgo adicional, ya que depende de la capacidad del gestor para identificar correctamente las oportunidades de mercado. Un gestor ineficiente (\cref{fig:mutual_funds_survival}) o un análisis incorrecto pueden generar pérdidas superiores a las del índice de referencia. La gestión pasiva, al replicar un índice ampliamente diversificado, asume el riesgo del mercado (riesgo sistemático) en su conjunto, lo que implica una volatilidad similar a la del propio mercado ($\beta = 1$), sin riesgo de decisiones activas incorrectas.
+    
+    \item \textbf{Retorno}: El objetivo de la gestión activa es generar $\alpha$, es decir, un retorno ajustado al riesgo superior al del mercado. Sin embargo, la literatura empírica sugiere que a largo plazo, muchos gestores activos no logran superar consistentemente a sus benchmarks. Por otro lado, la gestión pasiva busca replicar el retorno del índice sin la posibilidad de superar sistemáticamente el benchmark. El problema de la inversión activa, tal y como se ha explicado en la \cref{fig:mutual_funds_survival}, es que muy pocos gestores son capaces de obtener retornos mejores que el índice a largo plazo. 
+    
+    \item \textbf{Coste}: La gestión activa es inherentemente más costosa debido a la investigación constante, el \textit{trading} frecuente y las mayores comisiones de gestión. La gestión pasiva, en cambio, tiene costes significativamente inferiores, especialmente al invertir a través de ETFs, permitiendo una estrategia atractiva para inversores con horizontes a largo plazo.
+\end{itemize}
+
+\subsection{Implicaciones de la EMT a la gestión de carteras}
+
+La validez de la EMT tiene implicaciones directas en la gestión de carteras. Si los mercados fueran completamente eficientes, como sostiene la EMT en sus tres formas, la gestión activa no tendría ningún valor, ya que ningún gestor, por más capacitado que esté, podría generar retornos superiores al mercado de manera consistente. En este escenario, los inversores deberían optar por estrategias pasivas, replicando índices de mercado, lo que conllevaría menores costos de gestión y comisiones.
+
+Sin embargo, la evidencia empírica sobre las ineficiencias temporales en los mercados, como el \textit{size effect}, el \textit{momentum} y las ineficiencias conductuales, sugiere que la gestión activa podría generar $\alpha$ en ciertos períodos o situaciones específicas de ineficiencia o volatilidad del mercado. No obstante, estas oportunidades suelen ser difíciles de predecir y, como se ha demostrado en la \cref{Contraargumentos a las críticas} \hyperref[Contraargumentos a las críticas]{Contraargumentos a las críticas}, la mayoría de los gestores no logran batir consistentemente al mercado, y aquellos que lo consiguen frecuentemente lo hacen por períodos limitados, como se muestra en el \cref{tab:EquityFunds_vs_Index}. \\
+
+\clearpage
+\section{Roboadvisors}
+\subsection{Metodología de los Roboadvisors}
+\cite{dacunto2020robo} definen los roboadvisors como plataformas digitales que proporcionan asesoramiento financiero de manera automatizada. Dependiendo de su nivel de sofisticación, los roboadvisors recopilan y utilizan información específica del inversor para diseñar planes financieros personalizados. Estos algoritmos optimizan las carteras de inversión y ajustan las estrategias en función de variables como el perfil de riesgo, los objetivos financieros y el horizonte temporal del usuario. 
+
+Dadas estas circunstancias, existen cuatro características que definen un roboadvisor:
+
+\begin{enumerate}
+    \item Nivel de personalización: En los modelos más básicos, la asignación de activos se basa en criterios simples como la edad del inversor o el horizonte temporal de la inversión, lo que produce carteras estándar que se ajustan únicamente a una o dos dimensiones de los datos del cliente. Estos modelos son comparables a los fondos de fecha objetivo (\textit{Target Date Funds})\footnote{Los \textit{Target Date Funds} son fondos de inversión que ajustan automáticamente su composición de activos a medida que se acerca una fecha determinada, como la jubilación. Un ejemplo es el \textit{Vanguard Target Retirement Fund}, que ajusta su exposición de acciones a bonos a medida que se acerca la fecha objetivo.}, siendo estos la forma más primitiva de roboadvisors.
+    
+    Por otro lado, los roboadvisors más avanzados recopilan un conjunto mucho más amplio de información sobre el cliente, incluyendo tolerancia al riesgo, situación financiera, ingresos y objetivos a largo plazo, para generar una asignación de activos más sofisticada y adaptada, como el Personal Advisor Services\footnote{Los \textit{Personal Advisor Services} son servicios de asesoría financiera personalizada que combinan la gestión automatizada con la orientación de asesores humanos. Un ejemplo es el \textit{Vanguard Personal Advisor Services}, que ajusta la asignación de activos en función de los objetivos y preferencias del cliente.}. Esta personalización permite que las carteras se ajusten de manera más precisa al perfil de cada inversor, utilizando modelos de optimización que maximicen el retorno ajustado por riesgo en función de las preferencias individuales \cite{dacunto2020robo}. Aun así, no tienen en cuenta ciertas inversiones no financieras que el individuo debe realizar en ciertos momentos, como la compra de una vivienda o un posible primer vehículo.
+
+    \item Grado de involucración del inversor\footnote{En este caso, el término inversor se trata como sinónimo de gestor.}: Existen dos enfoques principales en cuanto a la participación del inversor que reflejan un balance entre el control del usuario y la automatización total. En el primer enfoque, el inversor puede revisar y aprobar cada recomendación antes de su implementación, lo que permite un control activo y la posibilidad de ajustar las decisiones según sus preferencias. Este modelo otorga flexibilidad, siendo Black-Litterman\footnote{Ver \cref{Black-Litterman} \hyperref[Black-Litterman]{Black-Litterman}.} un ejemplo de algoritmo que permite incorporar las expectativas del inversor en la estrategia. En este modelo, el balance de la involucración del inversor en la toma de decisiones se refleja en la \cref{Calibración de tau} \hyperref[Calibración de tau]{Calibración de $\tau$}. 
+    
+    En el segundo enfoque, las plataformas son completamente automatizadas, gestionando la cartera de forma autónoma una vez configurada. Aquí, el inversor no interviene en decisiones futuras\footnote{Un ejemplo sería el modelo de Markowitz (\cref{Markowitz} \hyperref[Markowitz]{Markowitz}), pues el inversor únicamente puede seleccionar el nivel de riesgo inicial, así como la selección de activos.}. Aunque eficientes, estos sistemas a veces se consideran más robo-managers que roboadvisors, ya que no involucran activamente al usuario en la gestión.
+    
+    \item Grado de discrecionalidad: Representa la capacidad del inversor de invalidar las opiniones del algoritmo. Por un lado, los roboadvisors \textit{libertarios puros} permiten cambiar la selección de activos y riesgo seleccionados por el roboadvisor\footnote{Ambos modelos, Markowitz y Black-Litterman (\cref{Markowitz} \hyperref[Markowitz]{Markowitz} y \cref{Black-Litterman} \hyperref[Black-Litterman]{Black-Litterman}, respectivamente) son considerados libertarios puros.}, mientras que los \textit{libertarios paternalistas} no permiten a los inversores intervenir en la asignación de activos, proporcionando únicamente ciertos parámetros predefinidos por el algoritmo. Esta falta de flexibilidad se observa en plataformas que priorizan la gestión pasiva y la diversificación estandarizada. En estos casos, la personalización se realiza únicamente en la configuración inicial, y el usuario no tiene capacidad de alterar la estrategia a lo largo del tiempo.
+    \begin{itemize}
+        \item Interacción de expertos: En los modelos puramente automatizados, no hay acceso a asesores humanos, lo que significa que todo el proceso de inversión, desde la construcción de la cartera hasta el rebalanceo y la gestión fiscal, es gestionado exclusivamente por algoritmos. Sin embargo, los roboadvisors híbridos combinan la automatización con la posibilidad de consultar a asesores humanos en momentos clave\footnote{Un ejemplo práctico sería el algoritmo de Black-Litterman.}. En estos casos, los asesores humanos suelen intervenir para validar o ajustar las recomendaciones automáticas, ofreciendo un componente cualitativo a la experiencia de inversión.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Papel de los roboadvisors en los mercados financieros}
+Debido a que los inversores tienden a sufrir sesgos de comportamiento, los resultados obtenidos son subóptimos, haciendo que los roboadvisors, libres de sesgo (en el caso de que hayan sido correctamente programados), representen una solución más eficiente. 
+
+Por otro lado, los inversores tienden a infradiversificar sus carteras. \cite{barber2000trading} señalan que un ciudadano medio estadounidense en uno de los brokers más grandes del país tenía únicamente 3 acciones en su portfolio entre los años 1991 y 1996. \cite{dacunto2019promises} encontraron una situación similar en India entre 2013 y 2015, con un promedio de 5 acciones.
+
+Asimismo, \cite{barber2000trading} destacan que los inversores también realizan \textit{trading} en exceso y de forma sesgada, siendo más propensos a vender un activo con ganancias que uno con pérdidas, lo que se conoce como \textit{Loss aversion bias}. Este comportamiento suele resultar en resultados subóptimos e incluso negativos.
+
+Gracias al papel de los roboadvisors, se logran mejoras en métricas como el Sharpe Ratio\footnote{El Sharpe Ratio se definirá en mayor profundidad en la \cref{Markowitz} \hyperref[Markowitz]{Markowitz}.} y el Information Ratio\footnote{El Information Ratio mide el desempeño ajustado al riesgo en relación con un índice de referencia, calculado como el exceso de retorno respecto a dicho índice dividido por el error de seguimiento (\textit{tracking error}), siendo: 
+\begin{equation}
+    \text{IR} = \frac{R_p - R_b}{\sigma_{R_p - R_b}} 
+\end{equation} 
+\label{Information Ratio} 
+Donde $R_p$ es el retorno del portafolio, $R_b$ es el retorno del índice de referencia, y $\sigma_{R_p - R_b}$ es la desviación estándar de la diferencia entre ambos retornos.}, optimizando así la relación riesgo-recompensa, principalmente debido a la reducción del riesgo en las decisiones de inversión automatizadas del roboadvisor. Además, se reduce el impacto de la \textit{Behavioral finance} (\cref{Behavioral finance} \hyperref[Behavioral finance]{Behavioral finance}), pues la implementación de los algoritmos elimina o reduce parcialmente el sesgo humano en los mercados.
+
+\subsubsection{Implicaciones de los roboadvisors en la teoría de mercados eficientes}
+Dada la diversidad de enfoques en los estilos de inversión, aunque los roboadvisors sigan algoritmos parametrizados que generan ciertos patrones comunes, no actúan todos de la misma manera. Según \cite{maume2021}, el hecho de que utilicen patrones similares no implica que todos los roboadvisors adopten estrategias homogéneas. Aunque compartan objetivos y restricciones, la composición de las carteras puede diferir significativamente entre plataformas. En un estudio de  \cite{better2020}, se observó que para un mismo perfil de inversor con objetivos de rentabilidad similares, 14 roboadvisors distintos ofrecieron asignaciones de renta variable que variaron entre un 9\% y un 95\%, lo que demuestra una gran disparidad en los resultados obtenidos.
+
+Además, \cite{maume2021} destaca que, aunque los roboadvisors realizan recomposición periódica de las carteras y operan con relativa frecuencia, su impacto en la eficiencia de mercado es mínimo en comparación con algoritmos de \textit{high frequency trading}, que tienen un efecto mucho más significativo en la volatilidad y en el funcionamiento de los mercados financieros. Así mismo, los mercados pueden volverse cada vez más ineficientes debido a la actuación en masa de los inversores, lo que afecta la racionalidad del mercado y puede generar burbujas en los precios. Esto podría provocar que los roboadvisors, parametrizados o entrenados incorrectamente bajo condiciones de estabilidad de mercado, generen grandes pérdidas ante shocks económicos.
+
+Existen discrepancias significativas en las estimaciones sobre los activos gestionados por los roboadvisors, debido principalmente a diferencias en la definición y alcance del concepto de roboadvisor. Según el informe de PwC, ''2023 Global Asset \& Wealth Management Survey'' (\cite{pwc2023}), los activos gestionados por roboadvisors alcanzaron los 2,5 billones de dólares en 2022, y se proyecta que esta cifra se duplique hasta llegar a 5,9 billones de dólares para 2027. En contraste, datos de Statista para 2024 (\cite{statista2024}) indican que los activos bajo gestión en el segmento de roboadvisors a nivel mundial se estiman en 1,8 billones de dólares, con un CAGR\footnote{CAGR \textit{Compounded Annual Growth Rate}, o tasa de crecimiento anual compuesta.} del 5,75\% entre 2024 y 2029.
+
+A nivel nacional, Indexa Capital, uno de los principales roboadvisors en España, gestionaba aproximadamente 1.525 millones de euros en enero de 2023, lo que refleja un crecimiento considerable dentro del mercado español.
+
+
+
+\subsubsection{Limitaciones de los roboadvisors}
+Los roboadvisors, aunque eficaces en la automatización de la gestión de portafolios, presentan diversas limitaciones en los mercados financieros. En primer lugar, la dependencia en datos históricos y modelos simplificados limita su capacidad para adaptarse a condiciones de mercado volátiles. Según el informe de la SEC (\cite{sec2017}) y el CFA \cite{cfa2019}, esta dependencia puede generar resultados poco robustos, especialmente en entornos de alta incertidumbre, debido a la sensibilidad de los modelos a cambios en los datos de entrada.
+
+Además, la personalización que ofrecen suele ser limitada, ya que se basa en perfiles de riesgo estandarizados que no siempre reflejan las necesidades específicas de cada inversor. Esto puede afectar la efectividad de las recomendaciones y reducir la satisfacción del cliente. La FINRA, en su informe \cite{finra2016}, ha señalado que, en momentos críticos, los inversores necesitan el apoyo humano que los roboadvisors no pueden proporcionar, lo que puede llevar a decisiones impulsivas o subóptimas.
+
+Por otro lado, los riesgos tecnológicos y de ciberseguridad también son una preocupación. Los roboadvisors están expuestos a ataques cibernéticos que podrían comprometer la seguridad de los datos de los usuarios. A esto se suma la falta de una regulación sólida y uniforme, lo que, según la SEC\footnote{\textit{Securities and Exchange Commission.}}, puede dejar a los inversores vulnerables ante posibles riesgos no controlados.
+
+Así pues,  \cite{cfa2019} destaca problemas de robustez relacionados con la fiabilidad y estabilidad dad su dependencia a datos históricos, la robustez en mercados volátiles y la subestimación de riesgos sistemáticos. Así pues, según \cite{roncalli2018}, para mejorar la robustez se puede aplicar una regularización de las matrices de covarianza utilizando técnicas como el método de Ledoit-Wolf, que suaviza los valores extremos de los datos, y el filtrado espectral, que elimina el ruido de las componentes menores de la matriz. Estos métodos son similares al estadístico de Gerber (\cref{Estadístico de Gerber} \hyperref[Estadístico de Gerber]{Estadístico de Gerber}), por lo que en este trabajo se trataran de corregir.
+
+Aun así, la optimización automática carece de flexibilidad para responder a eventos de mercado no anticipados, por lo que, según \cite{asness2023}, es conveniente incorporar métodos de penalización como Tikhonov o Lasso, que regulan los pesos del portafolio para evitar posiciones extremas, ofreciendo un mayor control sobre las exposiciones del portafolio y facilitando ajustes ante cambios repentinos en el mercado.
+\clearpage
+
+\section{Modelo de optimización de Markowitz} \label{Markowitz}
+
+El modelo de optimización de carteras de Markowitz, también conocido como teoría de carteras moderna (\textit{Modern Portfolio Theory (EMT}), fue propuesto por Harry Markowitz en 1952 y representó una revolución de las finanzas. Este modelo tiene como objetivo la construcción de un portfolio eficiente en términos de rentabilidad y riesgo, maximizando el retorno esperado para un nivel dado de riesgo o minimizando el riesgo para un nivel dado de retorno. En este modelo el inversor únicamente puede decidir el nivel de riesgo o retorno objetivo, por lo que es una aproximación simple y relativamente sencilla de entender para el inversor.
+
+El concepto clave del modelo es la frontera eficiente (\textit{efficient frontier}), que representa el conjunto de portfolios que ofrecen la mejor relación entre retorno y riesgo posible para distintos niveles de riesgo. Los portfolios ubicados en esta frontera son óptimos, ya que ningún otro portfolio puede ofrecer un mayor retorno para el mismo nivel de riesgo o un menor riesgo para el mismo retorno esperado.
+
+\subsubsection{Fórmula de la media-varianza de Markowitz}
+
+El modelo busca minimizar la varianza del portfolio, sujeto a una restricción de retorno esperado. El problema de optimización de portfolios se puede formular de la siguiente manera:
+\begin{equation}
+ \min_w \, \sigma_p^2 =  w^T \Sigma w = \sum_{i=1}^{n} \sum_{j=1}^{n} X_i X_j \sigma_{i,j}   
+\end{equation} \label{Optimización Markowitz}
+
+
+Sujeto a:
+
+\begin{equation}
+    w^T \mu = \mu_p
+\end{equation} \label{Restricción de rentabilidad}
+
+\begin{equation}
+    \sum_{i=1}^n w_i = 1
+\end{equation} \label{Restricción de suma de pesos}
+
+\begin{equation}
+    w_1, w_2, w_3, \dots, w_N \geq 0
+\end{equation} \label{Restricción de no negatividad}
+
+
+Donde:
+
+\begin{itemize}
+    \item $w$: Vector de pesos del portfolio, es decir, la proporción de capital invertido en cada activo.
+    \item $\Sigma$: Matriz de covarianzas de los retornos de los activos, que captura las relaciones de riesgo entre ellos.
+    \item $\sigma_{i,j}$: Covarianza entre los retornos de los activos $i$ y $j$.
+    \item $\mu$: Vector de retornos esperados de los activos.
+    \item $\mu_p$: Retorno esperado del portfolio.
+\end{itemize}
+
+\subsubsection{Supuestos del Modelo}
+
+El modelo de Markowitz parte de varios supuestos fundamentales:
+
+\begin{itemize}
+    \item Racionalidad y aversión al riesgo: Los inversores son racionales y aversos al riesgo, prefiriendo un portfolio con menor riesgo para un mismo nivel de retorno esperado.
+    \item Distribución normal de los retornos: Los retornos esperados de los activos siguen una distribución normal, lo que implica que los rendimientos se distribuyen simétricamente alrededor de la media, y que eventos extremos son poco probables.
+    \item Decisiones basadas en media y varianza: Las decisiones de los inversores se basan exclusivamente en el rendimiento esperado y la varianza de los retornos, donde el rendimiento esperado mide la rentabilidad y la varianza el riesgo.
+    \item Mercados eficientes: Los mercados son eficientes, es decir, los precios de los activos reflejan toda la información disponible de manera inmediata, lo que garantiza que no hay oportunidades de arbitraje.
+    \item Ausencia de costos de transacción: No existen costos de transacción ni impuestos que afecten la construcción y ajuste de los portfolios de los inversores.
+    \item Préstamo y endeudamiento a tasa libre de riesgo: Los inversores pueden prestar o pedir prestado a una tasa libre de riesgo sin restricciones, lo que les permite ajustar su nivel de riesgo-retorno de manera óptima.
+\end{itemize}
+
+\subsection{Frontera Eficiente}
+
+La \textit{frontera eficiente} es el conjunto de portafolios óptimos que se obtiene al resolver el problema de optimización para distintos niveles de retorno esperado ($\mu_p$). En el caso de una cartera compuesta por dos activos, la frontera eficiente, es decir, la relación entre el retorno esperado ($\mu$) y la desviación estándar ($\sigma$) de la cartera resultante, dependerá de la correlación entre ambos activos ($\rho$). Tal como se observa en la \cref{fig:Ejemplo_Frontera}, la curva de riesgo cambia con diferentes combinaciones de activos en función de $\rho$.
+
+\FloatBarrier
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{TFG/Imagenes TFG/Ejemplo_Frontera.png} 
+    \caption{Ejemplo de construcción de una frontera eficiente según el valor de $\rho$.} 
+    \label{fig:Ejemplo_Frontera}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: FBCDI Research Seminar}
+\end{figure}
+\FloatBarrier
+
+En carteras más complejas, los inversores seleccionan un portafolio en esta frontera en función de su tolerancia al riesgo\footnote{Deben considerarse solo los portafolios con retornos superiores al portafolio de mínima varianza, ya que aquellos por debajo de este (representados como puntos grises en la \cref{fig:Efficient_Frontier}) presentan el mismo riesgo que sus contrapartes pero con menores retornos, por lo que no se consideran eficientes.}. A medida que aumenta el retorno esperado, el riesgo también lo hace. La frontera eficiente se representa gráficamente en un espacio donde el eje horizontal corresponde al nivel de riesgo de cada cartera (\textit{Target risk}) y el eje vertical al nivel de rentabilidad esperada (\textit{Target return}), como se muestra en la \cref{fig:Efficient_Frontier}\footnote{Los activos seleccionados para la optimización de una cartera según el modelo de Markowitz son: The Coca-Cola Company (KO), Lennar Corp. (LEN), Exxon Mobil Corp. (XOM), Bank of America Corp. (BAC), Walmart Inc. (WMT), Monster Beverage Corp. (MNST) y Visa Inc. (V). Todos los activos han sido analizados en el período 2015-2022.}.
+
+\FloatBarrier
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{TFG/Imagenes TFG/Efficient_Frontier.png} 
+    \caption{Ejemplo de construcción de una frontera eficiente con una selección aleatoria de activos del S\&P 500, 2015-2022.} 
+    \label{fig:Efficient_Frontier}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+
+En la figura superior se muestran los diferentes resultados de la cartera. Las diferentes figuras se explican a continuación:
+\begin{itemize}
+    \item Puntos blancos: Representan las carteras situadas en la frontera eficiente. Solo las carteras en el tramo superior son las recomendadas, ya que maximizan el retorno esperado para un determinado nivel de riesgo.
+    \item Líneas rojas: Representan la combinación de dos activos, de forma similar a la \cref{fig:Ejemplo_Frontera}, lo cual permite aproximar el valor de $\rho$ para cada par de activos en la cartera.
+    \item Puntos verdes: Representan simulaciones de Monte Carlo. Aunque estos puntos también corresponden a carteras simuladas, son subóptimos, ya que ofrecen un menor retorno para el mismo nivel de riesgo.
+\end{itemize}
+
+Una vez construida la frontera eficiente, es posible determinar la Línea de Mercado de Capitales (\textit{Capital Market Line, CML}) al combinarla con la tasa libre de riesgo. La CML permite encontrar el portafolio óptimo para un inversor que puede tanto prestar como pedir prestado a dicha tasa. Este portafolio, denominado \textit{portafolio de mercado}, es aquel que maximiza la relación de Sharpe\footnote{El Sharpe Ratio (SR) es una medida utilizada en el análisis de carteras, basada en la rentabilidad excedente ajustada por el riesgo del portafolio ($\sigma_p$). Se define como: 
+\begin{equation}
+    \text{SR} = \frac{R_p - R_f}{\sigma_p} \quad \left\{ \begin{array}{l} 
+        R_p - R_f: \text{ Rentabilidad excedente del portafolio} \\
+        \sigma_p: \text{ Riesgo del portafolio}
+    \end{array} \right.
+\end{equation} \label{Sharpe Ratio}
+}.
+
+\FloatBarrier
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{TFG/Imagenes TFG/Efficient_frontier_line.png} 
+    \caption{Ejemplo de construcción de una Frontera eficiente con  una selección aleatoria de activos del S\&P 500 combinado con la tasa libre de riesgo, 2015-2022.}
+    \label{fig:Efficient Frontier Line}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+En el gráfico, la CML está representada por una línea azul, y el puntotangente a la frontera eficiente corresponde al \textit{portfolio de mercado}, que maximiza la relación de Sharpe, en base a la $R_f$ establecida. Dicho portfolio se destaca con un punto azul en la \cref{fig:Efficient Frontier Line}. 
+Para este ejemplo, el portfolio de mercado tiene un riesgo y rentabilidad las determinadas en la imagen, siendo aproximadamente $\mu_p \approx 0.025$ mensual y $\sigma \approx 0.03$, tal y como se puede ver en la \cref{fig:Efficient Frontier Line}.
+
+Por ende, es posble observar, de forma aproximada, como hay diversificación de activos en el portfolio. En la \cref{fig:Pesos Markowitz} se muestran todas las posibles combinaciones de activos de los portfolios de la frontera eficiente. 
+
+\FloatBarrier
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{TFG/Imagenes TFG/Pesos_markowitz.png} 
+    \caption{Pesos para la cartera óptima de la Frontera eficiente y CML, 2015-2022.}
+    \label{fig:Pesos Markowitz}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure} 
+\FloatBarrier
+
+Como se puede apreciar en la \cref{fig:Pesos Markowitz}, hay una línea vertical negra que ofrece la los pesos de la cartera de mínimo riesgo, señalada por el punto rojo sólido en la \cref{fig:Efficient Frontier Line}. Por otro lado, la cartera óptima, pese a no estar representada visualmente por ninguna línea\footnote{El portafolio correspondiente está representado aproximadamente en la cuarta columna empezando por la derecha en \cref{fig:Pesos Markowitz}.}, se puede desglosar en la siguiente tabla:
+ 
+\FloatBarrier
+\begin{table}[h]
+\centering
+\begin{tabular}{l r}
+\toprule
+\textbf{Pesos de la cartera eficiente resultante} & \textbf{Pesos} \\
+\midrule
+Visa & 82.61 \\
+Monster & 12.65 \\
+Walmart & 4.73 \\
+\midrule
+Total & 100.00 \\
+\bottomrule
+\end{tabular}
+\caption{Pesos de la cartera eficiente resultante}
+\label{tab:cartera_eficiente}
+\end{table}
+\FloatBarrier
+
+Una de las características que se puede apreciar es que se comprueba que para cada combinación de pesos $\sum_{i=1}^n w_i = 1$, a pesar de que $\exists \hspace{0.1 cm} i \in \{1, \dots, n\} \ \text{tal que} \ w_i = 0$. \\
+En este caso, buscando los valores concretos en los resultados, obtenemos que $\mu_p = 0.002511995$ mensual, con $\sigma = 0.02983666$, valores que se pueden apreciar, de forma aproximada, en la \cref{fig:Pesos Markowitz}\footnote{El portafolio correspondiente está representado aproximadamente en la cuarta columna empezando por la derecha.}.
+
+\subsection{Ventajas e inconvenientes} \label{Ventajas e inconvenientes}
+El modelo de Markowitz ofrece una serie de ventajas notables, entre las principales se encuentran:
+
+\begin{enumerate}
+    \item Diversificación óptima: El modelo fomenta una diversificación eficiente, permitiendo reducir el riesgo de una cartera sin sacrificar rentabilidad mediante la optimización de la combinación de activos con bajas correlaciones entre sí.
+    
+    \item Optimización de la relación riesgo-retorno: El modelo equilibra el retorno esperado con el riesgo asociado, proporcionando un marco claro para seleccionar carteras que maximizan la utilidad para los inversores, ajustando el nivel de riesgo según su aversión.
+    
+    \item Base teórica sólida: El modelo está respaldado por una base teórica rigurosa y matemática, ampliamente comprobada y validada, fundamentada en principios de optimización estadística del riesgo y retorno.
+    
+    \item Simplicidad en su implementación: A pesar de su sofisticación teórica, el modelo es relativamente sencillo de aplicar y comprender, facilitando su uso por parte de inversores y profesionales del sector.
+\end{enumerate}
+
+Por otro lado, el modelo de Markowitz también presenta ciertas desventajas que limitan su aplicabilidad práctica, especialmente en el contexto de algoritmos automatizados como los utilizados en roboadvisors. Las principales desventajas son:
+
+\begin{enumerate}
+    \item Sensibilidad a los datos de entrada \label{Sensibilidad a los datos de entrada}: El modelo de Markowitz es altamente sensible a los datos de entrada, concretamente a los retornos esperados y las covarianzas:
+    \begin{enumerate}
+        \item Retornos esperados: Best y Grauer (1991) \cite{best1991} demostraron que un pequeño aumento en el rendimiento esperado de un activo dentro de un portafolio puede provocar una recomposición de la cartera, llegando incluso a excluir ciertos activos presentes inicialmente. Además, Michaud (1989) \cite{michaud1989} destaca la alta sensibilidad a errores de estimación, que puede resultar en carteras extremas.
+        \item Matriz de covarianzas \label{Matriz de covarianzas}: Dado que se calcula a partir de datos históricos, puede reflejar ruido o movimientos sin relevancia económica, generando una frontera eficiente poco representativa\footnote{Es importante señalar que cualquier frontera eficiente, como ejemplo la \cref{fig:Efficient Frontier Line}, se ve afectada por esta limitación, ya que su construcción depende de $\rho$, que a su vez depende de $Cov(i,j)$, provocando que un cambio en esta altere la forma de la frontera resultante.} de posibles escenarios futuros. Para abordar esta limitación, se considera el uso de la \cref{Estadístico de Gerber} \hyperref[Estadístico de Gerber]{Estadístico de Gerber}, que propone un método robusto para medir co-movimientos significativos al ignorar fluctuaciones menores y, por ende, mejorar la estabilidad de la matriz de covarianzas.
+    \end{enumerate}    
+
+    \item Supuestos poco realistas: El modelo asume que las rentabilidades pasadas son representativas e imparciales para estimar rentabilidades futuras, lo cual, combinado con la sensibilidad a los datos de entrada (\cref{Sensibilidad a los datos de entrada} \hyperref[Sensibilidad a los datos de entrada]{Sensibilidad a los datos de entrada}), omite posibles eventos como burbujas especulativas o retornos anormales, definidos en \cref{Burbujas especulativas} \hyperref[Burbujas especulativas]{Burbujas especulativas}, pasando por alto la tendencia al retorno a la media. Además, ignora la relación entre el precio de un activo y su subyacente, así como otras relaciones fundamentales\footnote{Estas relaciones pueden incluir el desempeño de la empresa, cambios en la estructura de capital y balance, variaciones en las expectativas del negocio o la relevancia de ratios como el PER (\textit{Price-Earnings Ratio}), PB (\textit{Price-Book Value}) o P/FCF (\textit{Price-Free Cash Flow}), entre otros, los cuales juegan un rol crucial en la valoración de activos.}. El modelo también supone que los inversores son completamente racionales, considerando únicamente $\mu$ y $\sigma$ en sus decisiones de inversión\footnote{Este supuesto ignora la influencia de comportamientos irracionales y los sesgos cognitivos y emocionales, tal y como se ha explicado en la \cref{Sesgos} \hyperref[Sesgos]{Sesgos}.}, teniendo un comportamiento no gaussiano de los retornos.
+
+    \item Exigencias computacionales: A medida que aumenta el número de activos, el cálculo de la matriz de covarianzas crece exponencialmente\footnote{La fórmula se deriva del número de pares únicos de activos en una cartera de $n$ activos donde solo es necesario calcular los pares de activos únicos, por lo que: \begin{equation}
+    \binom{n}{2} = \frac{n \times (n-1)}{2}
+    \end{equation} \label{Combinatoria}}, requiriendo un poder computacional elevado incluso con un número moderado de activos\footnote{Esta desventaja es inherente a gran cantidad de modelos debido al tratamiento de grandes cantidades de datos históricos, por lo que no es exclusiva de este modelo.}.
+    
+    \item Simplificación del riesgo: El modelo identifica el riesgo únicamente como volatilidad ($\sigma$). Esta simplificación presenta dos problemas:
+    \begin{enumerate}
+        \item Riesgo y volatilidad: Mide el riesgo exclusivamente mediante la volatilidad, lo que puede llevar a clasificar activos volátiles pero relativamente seguros como altamente riesgosos, cuando en realidad pueden ofrecer protección en escenarios adversos. Tal y como se ha explicado en la matriz de covarianzas (\cref{Matriz de covarianzas} \hyperref[Matriz de covarianzas]{Matriz de covarianzas}), esta desventaja puede ser corregida a través de la \cref{Estadístico de Gerber} \hyperref[Estadístico de Gerber]{Estadístico de Gerber}.
+        \item Simplificación adicional del riesgo \label{Simplificación del riesgo}: El modelo no toma en cuenta otros factores de riesgo importantes, como la liquidez, el riesgo de crédito o eventos extremos\footnote{La presencia de eventos extremos provoca que la distribución real se asemeje a una distribución con asimetría positiva y exceso de kurtosis, entendida como una distribución de colas gruesas.}.
+    \end{enumerate}
+\end{enumerate}
+
+\clearpage
+
+\section{Modelo Black-Litterman} \label{Black-Litterman}
+
+El modelo Black-Litterman es un enfoque avanzado de optimización de carteras que permite a los inversores combinar sus expectativas subjetivas sobre ciertos activos, con distintos niveles de confianza, con las estimaciones implícitas del mercado, basadas en las capitalizaciones de mercado y las correlaciones históricas entre activos. A través de un enfoque bayesiano, este modelo ajusta los rendimientos esperados \textit{ex-ante} del mercado, incorporando las opiniones del inversor para producir una distribución \textit{ex-post} que optimiza la asignación de activos de forma más intuitiva y diversificada\footnote{Ver Idzorek, T. M. (2004), ''A Step-by-Step Guide to the Black-Litterman Model''.}.
+
+Este modelo, desarrollado por Fischer Black y Robert Litterman en 1990 y refinado en 1992 \cite{black1992}, surgió para abordar los problemas del modelo de Media-Varianza de Markowitz. Tal como se menciona en la \cref{Ventajas e inconvenientes} \hyperref[Ventajas e inconvenientes]{Ventajas e inconvenientes}, el modelo de Markowitz tiende a ser extremadamente sensible a pequeñas variaciones en los retornos esperados, lo que da lugar a carteras poco intuitivas y altamente concentradas\footnote{Black y Litterman describen este problema como \textit{input-sensitivity problem}, en el cual pequeñas variaciones en los parámetros de entrada resultan en cambios drásticos en las asignaciones de activos.}.  \\
+
+El enfoque canónico\footnote{Enfoque tradicional y fiel al propuesto por Fischer Black y Robert Litterman. En este trabajo se empleará este enfoque.} del modelo Black-Litterman asume que el rendimiento esperado del mercado sigue una distribución normal multivariante\footnote{Ver Idzorek, T. M. (2004), ''A Step-by-Step Guide to the Black-Litterman Model''.}, permitiendo a los inversores incorporar sus opiniones sobre activos individuales o combinaciones de activos, que, al igual que el rendimiento del mercado, también sigue una distribución normal multivariante. Además, permite ajustar la magnitud de los cambios en las asignaciones de activos en función del nivel de confianza del inversor, haciendo que las carteras resultantes sean más intuitivas y robustas. De esta manera, se logra que las carteras resultantes no dependan exclusivamente de las suposiciones de la teoría moderna de carteras, sino que también reflejen las creencias activas del gestor y su conocimiento del mercado, superando las críticas más frecuentes al modelo de Markowitz. 
+Por otro lado, según \cite{michaud1989}, el modelo de Black-Litterman distribuye los errores de estimación de manera más equitativa, mitigando los problemas identificados\footnote{Ver Michaud (1989), ''The Markowitz Optimization Enigma: Is 'Optimized' Optimal?''.}. 
+
+La fórmula central del modelo Black-Litterman, que combina las opiniones del inversor con las expectativas implícitas del mercado para calcular los rendimientos esperados ajustados, es:
+
+\begin{equation}
+    E(R) = \left[ \left( \tau \Sigma \right)^{-1} + P^T \Omega^{-1} P \right]^{-1} \left[ \left( \tau \Sigma \right)^{-1} \Pi + P^T \Omega^{-1} Q \right]
+\end{equation} \label{Black-Litterman}
+
+Donde:
+
+\begin{itemize}
+    \item $E(R)$: Vector de rendimientos combinados, que resulta de integrar las opiniones del inversor con las expectativas de mercado.
+    \item $\tau$: Parámetro escalar, $\tau \in [0,1]$. Refleja el nivel de incertidumbre del inversor sobre los retornos implícitos (\textit{excess return}) del mercado. Será tratado en mayor detalle en la \cref{Calibración de tau} \hyperref[Calibración de tau]{Calibración de $\tau$}.
+    \item $\Pi$: Vector de retornos implícitos del mercado, derivados de las capitalizaciones bursátiles de los activos\footnote{$\Pi$ equivale al cálculo del \textit{excess return} de CAPM relativo al portafolio ponderado por capitalización usando $\beta$ implícitas. Ver Idzorek, T. M. (2004), A Step-by-Step Guide to the Black-Litterman Model (pag. 6 Tabla 1).}.
+    \item $\Sigma$: Matriz de covarianzas de los excesos de retornos implícitos de los activos.
+    \item $Q$: Vector de rendimientos esperados según las opiniones del inversor.
+    \item $P$: Matriz que define las opiniones del inversor sobre uno o más activos o combinaciones de activos.
+    \item $\Omega$: Matriz de covarianzas de las opiniones del inversor, que mide la incertidumbre asociada a dichas opiniones.
+\end{itemize}
+
+Esta fórmula permite integrar las creencias subjetivas del inversor con la información de equilibrio del mercado, ajustando los retornos esperados en función del nivel de confianza en dichas creencias. Esto resulta en portafolios más equilibrados y diversificados, que reflejan tanto las expectativas del mercado como las perspectivas individuales del gestor.  \\
+
+Los dos elementos clave del modelo Black-Litterman son:
+
+\begin{enumerate}
+    \item \textbf{Equilibrio del mercado}: El modelo parte de la hipótesis de que el mercado se encuentra en equilibrio, lo que implica que los rendimientos esperados de los activos (vector $\Pi$) pueden derivarse a partir de las capitalizaciones de mercado, detallado en la \cref{explicacion pesos} \hyperref[explicacion pesos]{Explicación de pesos}. Estos rendimientos implícitos representan las creencias del mercado en su conjunto.
+    
+    \item \textbf{Opiniones del inversor}: Las creencias del inversor sobre ciertos activos o combinaciones de activos se incorporan al modelo como restricciones adicionales ($Q$). Estas opiniones ajustan los rendimientos esperados, ponderándose según el nivel de confianza que el inversor asigna a sus expectativas ($\Omega$)\footnote{Idzorek (2004) detalla cómo el modelo ajusta las asignaciones en función del nivel de confianza del inversor.}.
+\end{enumerate}
+
+
+\subsection{Desarrollo de la Black-Litterman}
+
+El modelo, tal y como se ha explicado en la \cref{Black-Litterman} \hyperref[Black-Litterman]{Black-Litterman}, es empleado para generar retornos bayesianos que posteriormente son introducidos y tratados a través de técnicas de optimización para encontrar el portafolio idóneo. Para encontrar la distribución final de Black-Litterman, hay que seguir una serie de pasos.
+
+\begin{enumerate}
+    \item Inicialmente es necesario desarrollar la función de utilidad del inversor\footnote{En la fórmula, $\Pi$ es el vector de \textit{excess return}, generalmente entendido como $R$ en terminología financiera, por lo que en el desarrollo del algoritmo de Black-Litterman debe entenderse que $R=\Pi$.}:
+    \begin{equation}
+    U = w^T \Pi - \frac{1}{2} \lambda w^T \Sigma w
+    \end{equation} \label{Utilidad}
+ 
+    Donde: 
+    \begin{itemize}
+        \item $\lambda$: Aversión al riesgo del inversor.
+        \item $w^T$: Matriz transpuesta de los pesos de los retornos implícitos.
+    \end{itemize}
+
+    Y, por lo tanto: 
+    \begin{itemize}
+        \item $w^T \Pi$: Retorno esperado total del portafolio ponderado por los pesos.
+        \item $\frac{1}{2} \lambda w^T \Sigma w$: Penalización por el riesgo del portafolio.
+    \end{itemize}
+    Es importante destacar que el objetivo es maximizar $U$, es decir, buscar el mejor balance entre retorno esperado y riesgo, sujeto a $w_{implícito} + w_{opinion} = 1$, por lo que\footnote{En la fórmula, $t$ representa un vector de unos (1) que ayuda al cálculo de la función, a pesar de no tener relevancia financiera en el modelo.}:
+    \begin{equation}
+    \lambda t w^T = 1
+    \end{equation} \label{Restriccion_lambda}
+
+    \item Para encontrar el portafolio óptimo, es necesario derivar la función:
+    \begin{equation}
+    \frac{du}{dw} = -\frac{1}{2} \times 2 \lambda \Sigma w = \Pi - \lambda \Sigma w = 0
+    \end{equation} \label{Derivada Utilidad}
+
+    \item \label{explicacion pesos} Generalmente se busca encontrar los pesos óptimos ($w$), como sería el caso de Markowitz. Sin embargo, Black y Litterman \cite{black1992} argumentaron que los pesos podían ser observados en el mercado, dado que es posible usar las capitalizaciones de mercado para hacer una optimización revertida\footnote{Sabiendo que $\Pi = \lambda \Sigma w$, debe cumplirse $\mu = \Pi$ para que $w = \frac{\mu}{(\lambda \Sigma)}$, de lo que se deriva que $w = w_{mercado}$. Es decir, Black-Litterman asume la capitalización de mercado como $w$.}, por lo que:
+    \begin{equation}
+    \Pi = \lambda \Sigma w_{mercado} \label{Equilibrio_Mercado}
+    \end{equation} 
+
+    Para usar la ecuación \ref{Equilibrio_Mercado} es necesario tener un valor $\lambda$. Un método de conseguirlo, descrito por Jay Walters (2017) \cite{walters2017}, sugiere multiplicar ambos lados de la fórmula por $w^T$ y reemplazar los vectores por términos escalares, resultando en:
+
+    \begin{equation} \label{Transformacion}
+    \begin{aligned}
+        (R - r_f) \times w^T &= (\lambda \Sigma w) w^T \\
+        (r - r_f) &= \lambda \sigma^2
+    \end{aligned}
+    \end{equation}
+
+    Así pues, sabiendo que $r = E(r_{mercado})$, obtenemos: 
+    \begin{equation} \label{Precio_Riesgo}
+    \begin{aligned}
+        \lambda &= \frac{E(r_{mercado}) - r_f}{\sigma^2} \\ 
+        \lambda &= \frac{\text{\footnotesize Sharpe Ratio}}{\sigma}
+    \end{aligned}
+    \end{equation}
+
+    \item Por último, dado que la matriz $\Sigma$ no tiene una forma simple de calcularla, Black y Litterman \cite{black1992} proponen la siguiente solución: 
+    
+    \begin{equation}
+    \Omega = \tau P \Sigma P^T
+    \end{equation} \label{Omega_Black_Litterman}
+
+    Dicha solución, al operar la distribución teórica resultante de las opiniones del inversor con la distribución a priori de $\Pi$, y reordenando, obtenemos $\sigma^2$ de la distribución final:
+    \begin{equation}
+    \sigma^2_{posterior} = \left[ \left(\tau \Sigma \right)^{-1} + P^T \Omega^{-1} P \right]^{-1}
+    \end{equation} \label{Inversa_Black_Litterman}
+
+    Por lo tanto, la distribución combinada final de Black-Litterman es: 
+    \begin{equation}
+    N \sim \left( E[R], \sigma^2_{posterior} \right)
+    \end{equation} \label{Distribucion_Black_Litterman}
+
+    Dicho proceso, explicado de forma gráfica, se encuentra en la \cref{fig:Evolución Black-Litterman}.
+\end{enumerate}
+
+\FloatBarrier
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{TFG/Imagenes TFG/Evolucion Black Litterman.png} 
+    \caption{Esquema del Proceso de Integración de opiniones del inversor en el Modelo Black-Litterman para la determinación de $E(R)$.}
+    \label{fig:Evolución Black-Litterman}
+    \vspace{0.5em}
+    \footnotesize \textit{Fuente: Idzorek, T. M. (2004), A Step-by-Step Guide to the Black-Litterman Model.}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{Supuestos del modelo}
+
+El modelo Black-Litterman se basa en una serie de hipótesis que permiten la integración de las expectativas del inversor con las del mercado. Los principales supuestos son:
+
+\begin{enumerate}
+    \item Equilibrio del mercado: Se asume que los precios de los activos reflejan toda la información disponible, es decir, el mercado está en equilibrio. Esto permite derivar los retornos implícitos a partir de las capitalizaciones bursátiles.
+    \item Distribución normal de los rendimientos: Los rendimientos de los activos se suponen distribuidos de manera normal multivariante, lo que facilita la aplicación de la matriz de covarianzas $\Sigma$ en la estimación del riesgo y la optimización de carteras.
+    \item Opiniones lineales: Las opiniones del inversor se expresan como combinaciones lineales de activos. Estas opiniones pueden reflejar tanto expectativas de rendimiento sobre activos específicos como relaciones entre los rendimientos de distintos activos.
+    \item Independencia de las opiniones: Se asume que las opiniones del inversor son independientes entre sí y no alteran la estructura de correlación del mercado.
+     \item Ausencia de costos de transacción: No existen costos de transacción ni impuestos que afecten la construcción y ajuste de los portfolios de los inversores.
+\end{enumerate}
+
+\subsubsection{Limitaciones y Restricciones} \label{Limitaciones y Restricciones}
+
+Debido a estos supuestos, el modelo de Black-Litterman presenta ciertas limitaciones:
+
+\begin{enumerate}
+    \item Dependencia de la normalidad: La asunción de que los rendimientos siguen una distribución normal puede no ser realista en entornos de alta volatilidad, donde los activos pueden mostrar colas gruesas o comportamientos no lineales, tal y como se ha comentado en la \cref{Simplificación del riesgo} \hyperref[Simplificación del riesgo]{Simplificación del riesgo}. 
+    \item Equilibrio del mercado: En mercados ineficientes los retornos implícitos derivados del equilibrio de mercado pueden no reflejar adecuadamente la realidad del mercado.
+    \item Dificultad en la especificación de opiniones: Para los inversores no experimentados, expresar opiniones precisas y cuantificables sobre ciertos activos puede ser complejo, lo que limita la aplicabilidad del modelo.
+    \item Sensibilidad a la matriz de covarianzas: La precisión de los resultados depende en gran medida de la exactitud de la matriz de covarianzas, que a menudo se estima utilizando datos históricos. Sin embargo, esta puede ser sensible a movimientos pequeños y ruidosos sin relevancia económica real, lo cual causa alteraciones en las covarianzas que pueden no ser representativas del futuro ni captar fenómenos como la reversión a la media de ciertos activos, tal y como se ha explicado en la \cref{Reversion a la media} \hyperref[Reversion a la media]{Reversión a la media}. Esta debilidad del modelo será abordada en la \cref{Estadístico de Gerber} \hyperref[Estadístico de Gerber]{Estadístico de Gerber}.
+
+    \item Sensibilidad a $\tau$: El modelo es altamente sensible a la selección del parámetro $\tau$. Una mala estimación de $\tau$ puede resultar en carteras subóptimas, generando resultados que difieren significativamente de los esperados y eficientes.
+\end{enumerate}
+
+\subsection{Calibración de variables}
+\subsubsection{Calibración de $\tau$} \label{Calibración de tau}
+
+El parámetro escalar $\tau$ es uno de los más complejos de ajustar en el modelo. Aunque se han publicado recomendaciones sobre cómo especificarlo, siempre existe un factor subjetivo que debe ser considerado por el inversor, ya que $ \tau $ mide la confianza del inversor en las estimaciones previas del mercado.
+
+Black y Litterman (1992) sugieren que el valor de $\tau$ debe ser pequeño, ya que la incertidumbre en las estimaciones de las opiniones es considerablemente menor que la incertidumbre en los propios rendimientos de los activos \footnote{Cuando la opinión refleja un diferencial de rendimientos esperados entre dos activos, $Q = E[R_{Activo_i}] - E[R_{Activo_j}]$, la incertidumbre de dicha opinión está relacionada con la matriz de covarianzas $\Sigma$. Sin embargo, dado que la opinión se basa en un diferencial de rendimientos y no en un rendimiento individual, la incertidumbre de $Q$ es menor que la incertidumbre de los rendimientos individuales. Esto se puede ver en la varianza del diferencial, que se calcula como $\sigma^2(Q) = \sigma^2_{R_{Activo_i}} + \sigma^2_{R_{Activo_j}} - 2 \cdot \text{Cov}(R_{Activo_i}, R_{Activo_j})$. A menos que los activos sean completamente no correlacionados o de naturaleza muy diferente, $\text{Cov}(R_{Activo_i}, R_{Activo_j}) \geq 0$, lo que reduce la varianza del diferencial $Q$. Por lo tanto, la incertidumbre de $Q$ se ajusta usando el parámetro $\tau$, de modo que la incertidumbre del diferencial se representa como $\tau \Sigma$. La distribución resultante de los rendimientos ajustados es $N \sim (\Pi, \tau \Sigma)$, tal como se ilustra en la \cref{fig:Evolución Black-Litterman}.}.
+
+Blamont y Firoozye (2003) sugieren un enfoque similar, proponiendo que $\tau$ sea aproximadamente $1/n$, donde $n$ es el número de observaciones, considerando que $\tau P$ refleja el error estándar en la estimación de los rendimientos de equilibrio implícitos, dado que $P$ refleja cómo las opiniones del inversionista se comparan con los rendimientos implícitos de equilibrio del mercado
+
+Por otro lado, Satchell y Scowcroft (2000) ajustan el valor de $\tau$ a 1, lo que contrasta completamente con las recomendaciones anteriores. \\
+
+
+\subsubsection{Calibración de $\Omega$} \label{Calibración de Omega}
+La matriz de incertidumbre $\Omega$ es otro de los parámetros críticos en el modelo Black-Litterman, ya que representa el nivel de confianza en las opiniones del inversionista.
+
+He y Litterman (1999) sugieren que el valor de $\Omega$ debe ajustarse de manera inversamente proporcional al nivel de confianza en las visiones. Así, cuando el inversor tiene un alto grado de confianza en sus visiones, $\Omega$ debe ser pequeño, indicando menor incertidumbre y, por lo tanto, mayor influencia de la visión en la composición del portafolio. En general, una práctica recomendada es escalar $\Omega$ en función de la matriz de covarianzas del mercado $\Sigma$, es decir, $\Omega = \tau \Sigma$, donde $\tau$ es el mismo parámetro que ajusta la incertidumbre del mercado \footnote{Al igual que en la calibración de $\tau$, donde la incertidumbre se ajusta para reflejar el diferencial de rendimientos, $\Omega$ puede utilizarse como una fracción de la matriz de covarianzas del mercado para moderar la influencia de las opiniones.}.
+
+Por su parte, Black y Litterman (1992) sugieren que la matriz $\Omega$ debe reflejar la precisión relativa de cada visión del inversor en función de la calidad de la información. Esto implica que $\Omega$ debe establecerse con base en la matriz de covarianzas $\Sigma$ del mercado. En la práctica, una forma común de calibrar $\Omega$ es usar los elementos diagonales de $\Sigma$ (si se supone que $\Omega$ es diagonal) y aplicar un factor proporcional a la confianza del inversor en cada visión específica. 
+
+En este trabajo, se utilizará la matriz $\Omega$ en función de la calibración sugerida por He y Litterman (1999), escalando la matriz de covarianzas del mercado $\Sigma$ mediante un valor de $\tau$, calibrado según el nivel de confianza del inversionista. De esta forma, la matriz de incertidumbre de las visiones se define como $\Omega = \tau \Sigma$.
+
+En caso de que dichos cálculos produzcan resultados incoherentes, se utilizará un valor de $\Omega$ en el rango de $[0.01, 0.1]$, dado su amplio uso en los estudios analizados.
+
+
+\subsubsection{Calibración de $\lambda$} \label{Calibración de lambda}
+El parámetro $\lambda$ en el modelo de Black-Litterman representa el nivel de aversión al riesgo del inversionista e influye en la ponderación de los rendimientos esperados de equilibrio en el modelo. Un mayor valor de $\lambda$ implica una mayor aversión al riesgo, lo que tiende a producir un portafolio más conservador.
+
+Black y Litterman (1992) proponen que $\lambda$ sea calibrado con base en el ratio de Sharpe esperado del mercado. Este enfoque establece que $\lambda$ debe reflejar la relación entre el retorno esperado del mercado y su volatilidad, lo cual proporciona una estimación adecuada para un nivel promedio de aversión al riesgo. Matematicamente:
+
+\begin{equation}
+    \lambda = \frac{E[R_m] - R_f}{\sigma_m^2}
+\end{equation} \label{Precio_Riesgo_Mercado}
+
+Este cálculo permite obtener un valor de $\lambda$ coherente con la relación de riesgo y retorno del mercado en cuestión, el cual será usado para este trabajo.
+
+En otros enfoques, la calibración de $\lambda$ puede ajustarse con base en el perfil de riesgo del inversionista. En la práctica, cuando se personalizan los portafolios para clientes específicos, $\lambda$ puede incrementarse para inversores aversos al riesgo o disminuirse para aquellos que buscan una mayor exposición al riesgo.
+
+\subsection{Estadístico de Gerber} \label{Estadístico de Gerber}
+Como se ha mencionado en la \cref{Limitaciones y Restricciones} \hyperref[Limitaciones y Restricciones]{Limitaciones y Restricciones}, una de las principales limitaciones del algoritmo de Black-Litterman y, en general, de cualquier modelo que utilice la matriz de covarianzas, es su sensibilidad a valores calculados a partir de datos históricos. Estos valores pueden reflejar ruido o movimientos sin relevancia económica, lo cual genera matrices que podrían no ser representativas del futuro, especialmente en contextos donde algunos activos presentan reversión a la media.
+
+Para mitigar este problema, se emplea el Estadístico de Gerber (Gerber, Markowitz y Pujara, 2015), que propone un método para medir co-movimientos significativos entre activos, excluyendo fluctuaciones menores. La construcción del estadístico se basa en los siguientes pasos:
+
+\begin{enumerate}
+    \item Para cada activo $k$, se establece un umbral $H_k$ en función de su desviación estándar de retornos $s_k$ y una constante de sensibilidad $c$, tal que:
+    \begin{equation}
+        H_k = c \cdot s_k
+    \end{equation}
+    donde $c$ puede tomar valores como 0.5, 0.7 o 0.9. En este trabajo, se empleará $c = 0.5$, como recomienda Gerber (2022).
+
+    \item Para cada par de activos $(i, j)$ y en cada período $t$, se comparan los retornos $r_{t,i}$ y $r_{t,j}$ con sus umbrales $H_i$ y $H_j$, asignando los valores +1, -1 o 0, según el siguiente criterio:
+    \begin{itemize}
+        \item +1 si ambos activos superan sus umbrales en la misma dirección (ambos aumentan o ambos disminuyen).
+        \item -1 si los activos superan sus umbrales en direcciones opuestas (uno sube y el otro baja).
+        \item 0 si al menos uno de los activos no supera su umbral.
+    \end{itemize}
+
+    A continuación se presenta un ejemplo de clasificación de movimientos conjuntos:
+    
+    \FloatBarrier
+    \begin{table}[h!]
+        \centering
+        \caption{Clasificación de Movimientos Conjuntos}
+        \label{tab:movimientos_explicacion_gerber}
+        \begin{tabular}{ccc}
+        \toprule
+        Activo $i$ & Activo $j$ & Valor asignado $m_{ij}(t)$ \\
+        \midrule
+        $+H_i$ & $+H_j$ & +1 \\
+        $-H_i$ & $-H_j$ & +1 \\
+        $+H_i$ & $-H_j$ & -1 \\
+        $-H_i$ & $+H_j$ & -1 \\
+        Otro caso & Otro caso & 0 \\
+        \bottomrule
+        \end{tabular}
+    \end{table}
+    \FloatBarrier
+
+
+    \item El Estadístico de Gerber $G_{ij}$ para cada par de activos $(i, j)$ se calcula como:
+    \begin{equation}
+        G_{ij} = \frac{\sum_{t=1}^{T} m_{ij}(t)}{T}
+    \end{equation}
+    donde $m_{ij}(t)$ es el valor asignado en cada período para el par $(i, j)$ y $T$ es el número total de observaciones. Este valor oscila entre -1 y 1, indicando la co-movilidad entre los activos.
+
+    \item Finalmente, se construye la matriz de covarianzas utilizando el Estadístico de Gerber en lugar de la matriz de correlación tradicional. 
+\end{enumerate}
+
+Este enfoque proporciona una representación más robusta de la co-movilidad entre activos, lo cual es particularmente útil en la optimización de portafolios. Al aplicar este estadístico, se logra separar los movimientos irracionales del mercado, considerados como ruido, de aquellos impulsados por la introducción de información relevante en los mercados. De esta manera, el Estadístico de Gerber contribuye a hacer los mercados más eficientes, ya que solo considera la volatilidad asociada a la racionalidad del mercado.
+
+\clearpage
+
+\chapter{METODOLOGÍA Y SELECCIÓN DE ACTIVOS}
+Para la selección de activos, se ha utilizado la librería \texttt{Quantmod}, concretamente la función \texttt{stockSymbols} para obtener todos los tickers posibles\footnote{La totalidad de tickers obtenidos es de 8000, por lo que se asegura una óptima representación de activos del mercado.} de los mercados americanos NASDAQ, NYSE y AMEX, asegurando una cobertura amplia\footnote{Todos los tickers de mayor capitalización están presentes en NASDAQ o NYSE, por lo que las empresas de gran capitalización que podrían estar en el S\&P 500 cotizan principalmente en NASDAQ o NYSE.} del universo observable de acciones americanas\footnote{Por acciones americanas se entiende toda compañía que cotiza en el mercado americano. No necesariamente debe tener domicilio fiscal en Estados Unidos. Existen casos de empresas chinas, como BABA, que cotizan en la bolsa americana a través de un ADR (\textit{American Depository Receipt}).}. Una vez obtenidos, se aplica el análisis textual\footnote{El análisis textual aplicado incluye la división de las palabras presentes, eliminación de palabras sin información relevante, realización de un análisis frecuentista, interpretación y clasificación de activos. Ver \cref{tab:tickers_etiquetas}.} y una serie de transformaciones para clasificar los distintos tickers, y por ende las compañías. Este análisis reveló las palabras más comunes, que luego fueron clasificadas en diferentes categorías clave (acciones comunes, fondos, ETFs, derechos de suscripción, entre otros), asignándoles etiquetas del 1 al 7\footnote{Ver \cref{tab:tipos_activos}, Clasificación de tipos de activos.}. Además, se garantizó la consistencia en los nombres de los tickers seleccionados, preparándolos para los análisis subsecuentes.
+
+Tal y como se puede apreciar en la \cref{tab:tickers_etiquetas} Listado de Tickers, los tickers están ordenados alfabéticamente y clasificados según su tipo de activo, teniendo todos la etiqueta común de \textit{Acciones comunes}. Esto no representa un problema, ya que el objetivo en esta parte del trabajo es la diferenciación para la posterior clasificación y filtrado de tickers, dependiendo del objetivo y las restricciones de la construcción de la cartera.
+
+
+\FloatBarrier
+\begin{table}[h!]
+    \centering
+    \caption{Listado de Tickers y Etiquetas Asignadas}
+    \label{tab:tickers_etiquetas}
+    \begin{tabular}{p{2cm}p{9cm}p{2cm}}
+        \hline
+        \textbf{Ticker} & \textbf{Nombre} & \textbf{Etiquetas} \\
+        \hline
+        ACU & Acme United Corp. Common Stock & 1, 6 \\
+        AE & Adams Resources \& Energy, Inc. Common Stock & 1 \\
+        AEF & abrdn Emerging Markets Inc. Fund, Inc. Common Stock & 1, 2 \\
+        AEON & AEON Biopharma, Inc. Class A Common Stock & 1 \\
+        AIM & AIM ImmunoTech Inc Common Stock & 1 \\
+        AIRI & Air Industries Group Common Stock & 1 \\
+        AMBI & Ambipar Emergency Response Class A Shares & 1, 3 \\
+        AMBI-WT & Ambipar Warrants for Class A Shares & 1, 3 \\
+        AMBO & Ambow Education Holding Ltd. ADRs & 1 \\
+        AMS & American Shared Hospital Services Common Stock & 1 \\
+        AP-WT & Ampco-Pittsburgh Corp. Series A Warrants & 1, 3, 5 \\
+        \hline
+    \end{tabular}
+    \vspace{0.7em} % Añadir espacio vertical
+\end{table}
+\FloatBarrier
+
+A continuación se muestra la leyenda y criterios que se han seguido para la clasificación de los activos considerados.
+
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Tipo} & \textbf{Descripción} \\
+\midrule
+1 & Acciones comunes: Acciones ordinarias, ADRs (American Depositary Receipts) \\
+2 & Fondos y ETFs: Fondos de inversión, Fondos cotizados (ETFs) \\
+3 & Warrants y opciones redimibles: Warrants, Títulos redimibles \\
+4 & Bonos y notas: Bonos, Notas perpetuas, Instrumentos subordinados \\
+5 & Activos preferentes y fiduciarios: Acciones preferentes, Series acumulativas, REITs \\
+6 & Unidades combinadas: Unidades de inversión \\
+7 & Derechos de suscripción: Derechos de adquisición \\
+\bottomrule
+\end{tabular}
+\caption{Clasificación de tipos de activos según palabras clave}
+\label{tab:tipos_activos}
+\end{table}
+\FloatBarrier
+
+El análisis se realiza desde el 1 de enero de 2022 hasta el 15 de enero de 2025\footnote{Fecha de finalización del estudio.}. Es importante destacar que los dos primeros años del estudio se destinan a la obtención de los datos del mercado y al cálculo de las fronteras, mientras que el año 2024 y el inicio de 2025 se dedican a la comprobación y análisis de los resultados obtenidos\footnote{Se simula una cartera construida el día 1 de enero de 2024 con los pesos resultantes del estudio.}. Este rango temporal permite capturar tendencias recientes del mercado, manteniendo un horizonte de análisis relevante y adecuado para la evaluación posterior.
+
+\subsubsection{Obtención del Market Cap}
+
+Para calcular la capitalización de mercado de cada activo, se utiliza la web \texttt{MacroTrends}, accediendo a la información a través de su API y utilizando la librería \texttt{jsonlite}. La búsqueda se realiza filtrando por cada ticker seleccionado de la cartera del inversor y obteniendo los datos correspondientes al período definido.
+
+\subsection{Cartera seleccionada}
+
+La cartera seleccionada\footnote{Se han eliminado los activos $BRK.A$ y $BRK.B$ debido a correlaciones cercanas a 1 entre ambos activos y la naturaleza del activo $BRK.A$. Además, dado que la rentabilidad depende directamente de la gestión de otro inversor (Warren Buffett), se excluyen los tickers para no tener que implementar opiniones sobre las gestiones de otro inversor.} para este análisis corresponde a la de Guy Spier, un destacado inversor, gestor de Aquamarine Capital Holdings, y autor del libro \textit{The Education of a Value Investor}. Spier es conocido por su enfoque disciplinado en la selección de activos, basado en principios de inversión en valor. Su cartera representa un ejemplo práctico de activos líquidos, relevantes y diversificados dentro del marco del \texttt{S\&P500}, lo que la hace idónea para los objetivos de este estudio.
+
+
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Ticker} & \textbf{Empresa} & \textbf{Market Cap del activo (M.M. de USD)} \\
+\midrule
+AXP    & American Express Co.         & 210.51 \\
+BAC    & Bank of America Corp.        & 343.29 \\
+MA     & Mastercard Inc.              & 485.08 \\
+RACE   & Ferrari NV                   & 76.64 \\
+MU     & Micron Technology Inc.       & 94.78 \\
+MCO    & Moody's Corp.                & 86.04 \\
+DJCO   & Daily Journal Corp.          & 0.77 \\
+BABA   & Alibaba Group Holding Ltd.   & 197.30 \\
+GOOGL  & Alphabet Inc.                & 2350.34 \\
+SRG    & Seritage Growth Properties    & 0.23 \\
+\bottomrule
+\end{tabular}
+\caption{Portafolio de Guy Spier}
+\end{table}
+\FloatBarrier
+
+\clearpage
+\subsubsection{Tasa libre de riesgo}
+
+Para el cálculo de la tasa libre de riesgo, se selecciona el \textit{T-Bill} americano a 3 meses\footnote{Se puede encontrar con el ticker \texttt{\$\textasciicircum \$IRX} en Google Finance para un análisis pormenorizado.}. Este instrumento financiero es ampliamente aceptado por el mercado debido a su alta liquidez, respaldo gubernamental y baja volatilidad. Desde un punto de vista técnico, el \textit{T-Bill} ofrece una aproximación confiable a la rentabilidad sin riesgo, lo que lo convierte en una referencia ideal para la calibración Black-Litterman. También es común en la literatura financiera y en análisis de fondos de inversión usar, como tasa libre de riesgo, el bono americano a 2 años (\$\texttt{\textasciicircum IRX2}) o 10 años (\$\texttt{\textasciicircum TNX}), entre otros.
+
+\clearpage
+\chapter{MARCO PRÁCTICO}
+
+\epigraph{\textit{Robo-advisors are a great democratizer, allowing investors of all levels to get sophisticated portfolio management at a low cost.}}{\textit{Burton G. Malkiel}}
+
+\subsection{Descripción de los activos}
+
+La cartera de activos seleccionados presenta una variedad de industrias, tamaños de empresa y situaciones financieras, lo que garantiza una diversidad en las rentabilidades esperadas. En primer lugar, es conveniente analizar, desde un punto de vista visual, el rendimiento de las acciones durante el período analizado.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{TFG/Imagenes TFG/evolucion_rentabilidad_portafolio.png}
+    \caption{Evolución de la rentabilidad del portafolio.}
+    \label{fig:evolucion_portafolio}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio).}
+    \vspace{0.7em}
+\end{figure}
+\FloatBarrier
+
+
+\FloatBarrier
+\begin{table}[h!]
+    \centering
+    \caption{Rentabilidad total, CAGR y desviación estándar por activo.}
+    \label{tabla:rentabilidad_activos_transpuesta}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lcccccccccccc}
+        \hline
+        \textbf{Métrica} & \textbf{AXP} & \textbf{BAC} & \textbf{MA} & \textbf{RACE} & \textbf{MU} & \textbf{MCO} & \textbf{DJCO} & \textbf{BABA} & \textbf{GOOGL} & \textbf{SRG} & \textbf{SP500} \\
+        \hline
+        Rent. Total (\%) & 11.37 & -27.09 & 14.98 & 30.42 & -10.87 & 1.82 & -4.13 & -35.61 & -3.66 & -29.86 & -0.56 \\
+        CAGR (\%)               & 5.53  & -14.61 & 7.23  & 14.20 & -5.59  & 0.90 & -2.09 & -19.76 & -1.85 & -16.25 & -0.28 \\
+        $\sigma$ (\%) & 1.96  & 1.87   & 1.63  & 1.80  & 2.66   & 1.82 & 2.16  & 3.68   & 2.20  & 4.16   & 1.23 \\
+        \hline
+    \end{tabular}%
+    }
+\end{table}
+\FloatBarrier
+
+En las métricas de rentabilidades a fecha de cierre del estudio se aprecia cómo únicamente 4 compañías han finalizado el período con rentabilidades positivas, mientras que el índice ha acabado plano en el transcurso de dos años. Por ende, las rentabilidades anualizadas también son muy bajas. 
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{TFG/Imagenes TFG/evolucion_rentabilidad_individual.png}
+    \caption{Evolución de la rentabilidad individual de los distintos activos}
+    \label{fig:evolucion_individual}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+    \vspace{0.7em}
+\end{figure}
+\FloatBarrier
+
+Por último, la \cref{fig:evolucion_individual} muestra la evolución de las rentabilidades individuales de los activos, para poder apreciar mejor su desempeño. Se aprecia cómo en la mayoría de los casos hay una evolución en forma de 'U', como es el caso de GOOGL o del índice S\&P500, lo que hay un cambio de tendencia en la evolución del mercado. La causa de las caídas generalizadas de los valores en 2022 y, en consecuencia, de los índices, fue la subida abrupta de los tipos de interés, tales como \textit{T-Bill} a 3 meses\footnote{La \textit{T-Bill} a 3 meses experimentó un rápido aumento durante los dos años de estudio, pasando de rentabilidades cercanas al 0\% anualizado al 5.18\%.} (\$\texttt{\textasciicircum IRX}), el bono americano a 2 años (\$\texttt{\textasciicircum IRX2}) o el bono americano a 10 años (\$\texttt{\textasciicircum TNX}).
+
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{TFG/Imagenes TFG/correlacion_activos_SP500.png}
+    \caption{Estadístico de Pearson de los activos con el S\&P 500.}
+    \label{fig:correlacion_activos_SP500}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio).}
+    \vspace{0.7em}
+\end{figure}
+\FloatBarrier
+
+El gráfico superior (\cref{fig:correlacion_activos_SP500}) destaca varias observaciones clave. En primer lugar, activos como MCO y GOOGL presentan una alta correlación con el índice (\(r = 0.78\) y \(r = 0.76\), respectivamente), reflejando una alta dependencia y/o contribución a los movimientos del mercado. Por otro lado, DJCO (\(r = 0.29\)) y BABA (\(r = 0.39\)) tienen correlaciones bajas. Esto se debe a que, en el primer caso, la naturaleza del negocio de DJCO está descorrelacionada con el desempeño de la economía y, por ende, de los índices de mercado. En el caso de BABA, dado que el grueso de su cifra de negocio recae en China, el desempeño de la acción está más descorrelacionado del desempeño de USA, aportando una posible diversificación a la cartera. Además, relaciones como AXP y BAC (\(r = 0.68\)) destacan por su vínculo sectorial, mientras que activos como RACE o BABA muestran menor interdependencia general, sugiriendo posibles beneficios en carteras optimizadas. Por lo tanto, existe la posibilidad de construir carteras con menor correlación entre los activos modificando el peso contribuido a la cartera por parte de cada uno de ellos.
+
+Por lo tanto, se procede con el modelo de optimización de Markowitz.
+
+\section{Resultados del modelo de Markowitz} \label{Resultados del modelo de Markowitz}
+
+Inicialmente, se implementa el modelo de media-varianza de Markowitz para el período de estudio\footnote{1 de enero de 2022 - 1 de enero de 2024.}. Este modelo requiere las rentabilidades diarias de cada activo y la definición de una tasa libre de riesgo. Dado que el período de análisis finaliza el 1 de enero de 2024, se selecciona como referencia la rentabilidad de la T-Bill de ese día, que asciende al 5.18\% anual. Para garantizar la consistencia temporal en los cálculos, se convierte esta tasa anualizada a su equivalente diaria, obteniendo un valor de 0.0197\%.
+
+A continuación, se presenta la \cref{fig:media_riesgo}, que ilustra la relación entre la rentabilidad media de los activos durante el período de estudio y el riesgo. Este análisis permite identificar cómo los diferentes activos se posicionan en términos de su desempeño y volatilidad relativa.
+
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{TFG/Imagenes TFG/grafico_riesgo_media.png}
+    \caption{Relación media-riesgo de los activos}
+    \label{fig:media_riesgo}
+    \vspace{0.7em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+Este gráfico es fundamental para el análisis previo a la optimización de portafolios de Markowitz. En el eje vertical se representa el rendimiento esperado ($E(R)$) y en el horizontal el riesgo ($\sigma$). Cada punto muestra la media y la varianza de un activo, mientras que las curvas entre ellos representan cómo se comportan las combinaciones de activos considerando sus covarianzas.
+
+La forma de estas líneas refleja la correlación entre los activos: aquellas más rectas indican que la correlación entre ese par de activos es elevada, mientras que las curvas sugieren correlaciones bajas o incluso negativas. En este caso, aunque existen relaciones con mayor curvatura, la mayoría de las líneas están aplanadas debido a las altas correlaciones entre los activos.
+
+Así pues, habiendo analizado las relaciones entre los activos, se procede a los resultados del modelo de Markowitz.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/frontera_eficiente_markowitz.png}
+        \caption{Frontera eficiente del modelo de Markowitz con portafolio tangente}
+        \label{fig:frontera_eficiente_Rf}
+        \vspace{0.7em}
+        \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/pesos_frontera_eficiente_markowitz.png}
+        \caption{Evolución de los pesos de las carteras frontera}
+        \label{fig:pesos_frontera_markowitz}
+        \vspace{0.7em}
+        \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+    \end{minipage}
+\end{figure}
+\FloatBarrier
+
+En la \cref{fig:pesos_frontera_markowitz} puede observarse que la frontera eficiente tiene como cartera de mínima varianza una rentabilidad prácticamente nula. Esto se debe a las bajas o incluso negativas rentabilidades de los activos de la cartera. Por otro lado, en la \cref{fig:frontera_eficiente_Rf}, la línea verde representa la CML, que une el activo libre de riesgo con la tangente de la frontera eficiente. En este caso, dado que la rentabilidad del activo libre de riesgo es tan elevada en comparación con la rentabilidad de los activos, la tangente se encuentra en el último punto de la frontera eficiente, es decir, la cartera de mayor rentabilidad posible, formada por un único activo, RACE\footnote{Representa la última columna de la \cref{fig:pesos_frontera_markowitz}.}. Esto implica que la cartera recomendada con el mejor Sharpe Ratio es una cartera compuesta por un único activo, lo que a efectos prácticos no puede considerarse una cartera eficiente.
+
+Respecto al gráfico de pesos de las carteras de la frontera eficiente (\cref{fig:pesos_frontera_markowitz}), se observa que la mayoría de carteras tienen rentabilidades negativas, y en las carteras que forman la frontera eficiente el peso de RACE crece exponencialmente junto con la rentabilidad esperada de la cartera.
+
+Para comprobar si esta situación ocurre únicamente debido al tipo de interés tan elevado del activo libre de riesgo, se analiza nuevamente la misma frontera, pero esta vez utilizando el tipo de interés promedio del período analizado, que asciende al 3.51\% anualizado.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{TFG/Imagenes TFG/frontera_eficiente_markowitz_Rf_media.png}
+    \caption{Frontera eficiente del modelo de Markowitz con portafolio tangente empleando $R_f = 3.51\%$}
+    \label{fig:frontera_eficiente_Rf_media}
+    \vspace{0.7em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+Tal y como se puede apreciar, no hay cambios en el punto tangente, por lo que se concluye que no es posible construir una cartera eficiente y lógica en el sentido práctico empleando la metodología de Markowitz con los datos de las rentabilidades de los activos. En ambas situaciones, \cref{fig:frontera_eficiente_Rf} y \cref{fig:frontera_eficiente_Rf_media}, se muestra una de las principales debilidades del modelo de Markowitz: la dependencia de los datos históricos de los activos y de la tasa libre de riesgo.
+
+Cuando los rendimientos han sido pobres y la tasa libre de riesgo es elevada, el \textit{Equity Risk Premium} disminuye considerablemente, llevando al modelo a sobreponderar activos con mayor rentabilidad histórica, construyendo carteras sobreconcentradas y desequilibradas, incumpliendo las premisas y objetivos de la diversificación, como sucede en este caso. Además, esta dependencia de los datos históricos impide la incorporación de los supuestos del inversor o analista para el futuro, que bien pueden ser mayores rentabilidades de ciertos activos o menor rentabilidad del activo libre de riesgo. Por ello, es necesario complementar los datos históricos con ajustes que consideren expectativas futuras, como en el modelo Black-Litterman, para construir carteras más robustas y balanceadas.
+
+\clearpage
+\section*{Implementación del modelo Black-Litterman} \label{Implementación_BL}
+
+Recordando la imagen explicativa (\cref{fig:Evolución Black-Litterman}), inicialmente es necesario calcular $\lambda$. Para ello, es necesario saber cuál es el retorno esperado del mercado ($E_r$), la tasa libre de riesgo ($R_f$) y la varianza del mercado ($\sigma^2$). 
+Para ello, se ha seleccionado el período del 1 de enero de 2015 al 1 de enero de 2024 para conocer cuál ha sido la rentabilidad media del índice de referencia, el S\&P500, y su varianza. Por otro lado, se ha implementado la misma tasa libre de riesgo que en el caso de Markowitz, dado que la finalización del horizonte temporal del estudio es la misma y, dada la naturaleza de $\lambda$, es necesario calcularla con el valor de $R_f$ del momento en el que finaliza el período de estudio\footnote{Misma metodología seguida para la implementación del modelo de Markowitz.}. El resultado es:
+
+$$
+\lambda = \frac{\text{E(R)} - R_f}{\sigma^2} = \frac{10.98\% - 5.18\%}{2.76}  = 2.11
+$$
+
+\smallbreak
+Seguidamente, es necesario implementar la capitalización de mercado de cada activo. Tal y como se ha mencionado anteriormente, dichas capitalizaciones relativas\footnote{Peso relativo respecto a la suma de las 500 compañías que componen el índice de referencia.} son:
+
+\FloatBarrier
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Activo} & \textbf{Market Cap (millones \$)} & \textbf{Peso relativo (\%)} \\
+\midrule
+AXP    & 210.51  & 0.42\% \\
+BAC    & 343.29  & 0.69\% \\
+MA     & 485.08  & 0.97\% \\
+RACE   & 76.64   & 0.15\% \\
+MU     & 94.78   & 0.19\% \\
+MCO    & 86.04   & 0.17\% \\
+DJCO   & 0.77    & 0.0015\% \\
+BABA   & 197.30  & 0.39\% \\
+GOOGL  & 2,350.34 & 4.70\% \\
+SRG    & 0.23    & 0.0005\% \\
+SP500  & 50,000  & 100\% \\
+\bottomrule
+\end{tabular}
+\caption{Nombres de los activos, sus capitalizaciones de mercado (Market Cap) y sus pesos relativos respecto al total del S\&P 500.}
+\label{tabla:market_cap_activos}
+\end{table}
+\FloatBarrier
+
+Seguidamente se calculan los retornos implícitos del mercado ($\Pi$):
+
+\FloatBarrier
+$$
+\Pi = \lambda \Sigma w_m = 2.11 \times 
+\begin{bmatrix}
+3.8467 \times 10^{-4} & 1.2245 \times 10^{-4} & \cdots & 1.6007 \times 10^{-4} \\
+1.2245 \times 10^{-4} & 3.4939 \times 10^{-4} & \cdots & 1.2764 \times 10^{-4} \\
+\vdots & \vdots & \ddots & \vdots \\
+1.6007 \times 10^{-4} & 1.2764 \times 10^{-4} & \cdots & 1.7338 \times 10^{-3}
+\end{bmatrix}
+\times
+\begin{bmatrix}
+0.0042 \\ % AXP
+0.0069 \\ % BAC
+0.0097 \\ % MA
+0.0015 \\ % RACE
+0.0019 \\ % MU
+0.0017 \\ % MCO
+0.000015 \\ % DJCO
+0.0039 \\ % BABA
+0.047 \\ % GOOGL
+0.000005 % SRG
+\end{bmatrix}
+=
+\begin{bmatrix}
+0.0004733622 \\ % AXP
+0.0004364140 \\ % BAC
+0.0004734654 \\ % MA
+0.0004351413 \\ % RACE
+0.0005623498 \\ % MU
+0.0004566977 \\ % MCO
+0.0003735658 \\ % DJCO
+0.0007022773 \\ % BABA
+0.0009419059 \\ % GOOGL
+0.0005190703 % SRG
+\end{bmatrix}.
+$$
+\FloatBarrier
+
+Una vez aplicada la fórmula y realizada la consiguiente optimización, se procede a mostrar los resultados de la \cref{Calibración de tau}. Blamont y Firoozye consideran apropiado evaluar $\tau$ como aproximadamente $1/n$ observaciones. Sin embargo, dado que la serie temporal se trabaja con datos diarios, se ha considerado oportuno utilizar un valor de $\tau = 0.025$\footnote{Valor seleccionado en base a las recomendaciones de He y Litterman.}.
+
+Así pues, habiendo calculado $\Pi$ y definido $\tau$, y mediante el cálculo de $\tau \Sigma$, que proporciona la distribución a priori de los activos, es momento de introducir la parte bayesiana a través de las opiniones del inversor ($P$ y $Q$) para calcular los retornos esperados ajustados ($\mu$) y la matriz de covarianzas ajustada ($\Sigma_{\text{BL}}$).
+
+Las opiniones del inversor se reflejan en la matriz $P$, donde cada fila corresponde a una opinión específica sobre la relación entre los activos. Estas opiniones, junto con las rentabilidades esperadas asociadas, son las siguientes:
+
+\begin{enumerate}
+    \item $ \text{AXP} $ superará a $ \text{BABA} $ en una rentabilidad esperada del $20\%$.
+    \item $ \text{RACE} $ superará a $ \text{MCO} $ en una rentabilidad esperada del $7,5\%$.
+    \item $ \text{DJCO} $ superará a $ \text{BAC} $ en una rentabilidad esperada del $5\%$.
+    \item $ \text{GOOGL} $ superará a $ \text{SRG} $ en una rentabilidad esperada del $5\%$.
+
+\end{enumerate}
+
+Estas opiniones se incorporan al modelo mediante la matriz $P$. Los valores cuantitativos esperados para cada opinión están expresados en el vector $Q$, calculado como $ (c+1)^{\frac{1}{256}} - 1 $, donde $c$ representa las opiniones originales en términos de rentabilidades anualizadas. Este reescalado transforma las rentabilidades anualizadas $c$ en rentabilidades diarias, bajo el supuesto de 256 días de cotización en un año. De esta manera, $Q$ refleja las opiniones ajustadas con las rentabilidades diarias.
+
+$$
+P =
+\begin{bmatrix}
+\textbf{AXP} & \textbf{BAC} & \textbf{MA} & \textbf{RACE} & \textbf{MU} & \textbf{MCO} & \textbf{DJCO} & \textbf{BABA} & \textbf{GOOGL} & \textbf{SRG} \\
+\hline
+1 & 0 & 0 & 0 & 0 & 0 & 0 & -1 & 0 & 0 \\ % Opinion1
+0 & 0 & 0 & 1 & 0 & -1 & 0 & 0 & 0 & 0 \\ % Opinion2
+0 & -1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ % Opinion3
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -1   % Opinion4
+\end{bmatrix}
+$$
+
+\[
+Q =
+\begin{bmatrix}
+(0.20 + 1)^{\frac{1}{256}} - 1 = 0.0007124473 \\
+(0.0125 + 1)^{\frac{1}{256}} - 1 = 0.0004601958 \\
+(0.15 + 1)^{\frac{1}{256}} - 1 = 0.0005460941 \\
+(0.1 + 1)^{\frac{1}{256}} - 1 = 0.0003723747
+\end{bmatrix}
+\]
+\smallskip
+De esta forma, dado que el cálculo de $\Omega$ se define inicialmente como:
+
+$$
+\Omega = P \Sigma P^\top \cdot \tau
+$$
+
+Se obtiene:
+
+$$
+\Omega =
+\begin{bmatrix}
+3.764080 \times 10^{-5} & -7.523548 \times 10^{-7} & -1.005716 \times 10^{-6} & -1.210172 \times 10^{-6} \\
+-7.523548 \times 10^{-7} & 1.098211 \times 10^{-5} & 5.268828 \times 10^{-8} & 1.019878 \times 10^{-7} \\
+-1.005716 \times 10^{-6} & 5.268828 \times 10^{-8} & 1.685588 \times 10^{-5} & 1.110918 \times 10^{-6} \\
+-1.210172 \times 10^{-6} & 1.019878 \times 10^{-7} & 1.110918 \times 10^{-6} & 4.802405 \times 10^{-5}
+\end{bmatrix}.
+$$
+
+No obstante, dado que la estructura de $\Omega$ puede simplificarse respetando las propiedades de independencia entre opiniones, se utiliza una aproximación diagonal, donde únicamente se conservan los elementos principales de $P \Sigma P^\top$. De esta manera, la matriz $\Omega$ queda expresada como:
+
+$$
+\Omega = \text{diag}(\text{diag}(P \Sigma P^\top)) \cdot \tau
+$$
+
+Esto genera la siguiente matriz diagonal, que preserva la robustez del modelo para plasmar la incertidublre de las opiniones del inversor:
+
+$$
+\Omega =
+\begin{bmatrix}
+3.76408 \times 10^{-5} & 0 & 0 & 0 \\
+0 & 1.098211 \times 10^{-5} & 0 & 0 \\
+0 & 0 & 1.685588 \times 10^{-5} & 0 \\
+0 & 0 & 0 & 4.802405 \times 10^{-5}
+\end{bmatrix}.
+$$
+
+Este ajuste diagonal permite simplificar el cálculo de $\Omega$ sin perder consistencia en la estimación de la incertidumbre asociada a las opiniones.
+
+Una vez descritas y calculadas todas las variables relevantes del modelo, se procede a calcular los retornos ajustados $\mu$, que integran tanto las estimaciones implícitas del mercado como las opiniones del inversor. Esto permite ajustar los retornos implícitos $\Pi$ con las nuevas expectativas ($P$ y $Q$), mediante la siguiente fórmula:
+
+$$
+\mu_{BL} = \left[ (\tau \Sigma)^{-1} + P^\top \Omega^{-1} P \right]^{-1} 
+\left[ (\tau \Sigma)^{-1} \Pi + P^\top \Omega^{-1} Q \right].
+$$
+
+En esta ecuación, el término $(\tau \Sigma)^{-1}$ representa la incertidumbre de los retornos implícitos del mercado, mientras que $P^\top \Omega^{-1} P$ pondera las opiniones del inversor en función de su incertidumbre. Como resultado, los retornos ajustados de los activos son:
+
+
+$$
+\mu_{BL} =
+\begin{bmatrix}
+0.0005320 \\ % AXP
+0.0003053 \\ % BAC
+0.0004526 \\ % MA
+0.0005394 \\ % RACE
+0.0005337 \\ % MU
+0.0003245 \\ % MCO
+0.0005407 \\ % DJCO
+0.0003075 \\ % BABA
+0.0009149 \\ % GOOGL
+0.0005138   % SRG
+\end{bmatrix}.
+$$
+
+Cada elemento corresponde al retorno ajustado de los activos $AXP$, $BAC$, $MA$, $RACE$, $MU$, $MCO$, $DJCO$, $BABA$, $GOOGL$ y $SRG$, respectivamente.
+
+Por otro lado, la matriz de covarianzas ajustada, $\Sigma_{\text{BL}}$, refleja los cambios en la estructura de riesgos del portafolio tras incorporar las opiniones del inversor. Se calcula como:
+
+$$
+\Sigma_{\text{BL}} = \Sigma + \left[ (\tau \Sigma)^{-1} + P^\top \Omega^{-1} P \right]^{-1}.
+$$
+
+El segundo término corrige la $\Sigma$ inicial considerando las actualizaciones derivadas de las opiniones, lo que permite integrar de manera coherente las perspectivas del mercado y del inversor. La matriz de covarianzas ajustada resultante es:
+
+$$
+\Sigma_{\text{BL}} =
+\begin{bmatrix}
+3.936383 \times 10^{-4} & 1.252491 \times 10^{-4} & 1.046628 \times 10^{-4} & \cdots & 1.636014 \times 10^{-4} \\
+1.252491 \times 10^{-4} & 3.566715 \times 10^{-4} & 7.279918 \times 10^{-5} & \cdots & 1.302361 \times 10^{-4} \\
+1.046628 \times 10^{-4} & 7.279918 \times 10^{-5} & 2.710695 \times 10^{-4} & \cdots & 1.247413 \times 10^{-4} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1.636014 \times 10^{-4} & 1.302361 \times 10^{-4} & 1.247413 \times 10^{-4} & \cdots & 1.760798 \times 10^{-3}
+\end{bmatrix}.
+$$
+
+Por consiguiente, se muestra la matriz de covarianzas convencional para poder comprobar que la matriz $\Sigma_{BL}$ tiene valores superiores que $\Sigma$. 
+
+\[
+\text{$\Sigma$} =
+\begin{bmatrix}
+3.846723 \times 10^{-4} & 2.489957 \times 10^{-4} & 2.035568 \times 10^{-4} & \cdots & 2.875059 \times 10^{-4} \\
+2.489957 \times 10^{-4} & 3.493870 \times 10^{-4} & 1.539878 \times 10^{-4} & \cdots & 2.734172 \times 10^{-4} \\
+2.035568 \times 10^{-4} & 1.539878 \times 10^{-4} & 2.644754 \times 10^{-4} & \cdots & 1.944599 \times 10^{-4} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+2.875059 \times 10^{-4} & 2.734172 \times 10^{-4} & 1.944599 \times 10^{-4} & \cdots & 1.733829 \times 10^{-3}
+\end{bmatrix}.
+\]
+
+Una vez calculadas $\mu_{BL}$ y $\Sigma_{BL}$, se procede a realizar una optimización de todas las carteras posibles para la creación de la frontera eficiente.
+
+\subsubsection*{Optimización con \texttt{solve.QP}} \label{Optimización solve}
+
+La optimización del portafolio se realiza utilizando la función \texttt{solve.QP} del paquete \texttt{quadprog} en R. Esta función está diseñada para resolver problemas de optimización cuadrática en la forma estándar:
+
+$$
+\min_{w} \, -d^T w + \frac{1}{2} w^T D w,
+$$
+
+donde $D = 2 \lambda \Sigma_{\text{BL}}$ corresponde a la matriz de covarianzas ajustada por la aversión al riesgo, y $d = \mu$ representa el vector de retornos esperados ajustados.
+
+Para adaptar esta herramienta al modelo Black-Litterman, se reformula la maximización de utilidad clásica como un problema de minimización, ajustando los signos de los términos de la función objetivo. En este contexto, el problema final toma la forma:
+
+$$
+\min_{w} \, -w^T \mu + \frac{1}{2} \lambda w^T \Sigma_{\text{BL}} w,
+$$
+
+donde $w$ representa los pesos del portafolio, $\mu$ es el vector de retornos ajustados, $\Sigma_{\text{BL}}$ es la matriz de covarianzas ajustada, y $\lambda$ es el parámetro de aversión al riesgo.
+
+El algoritmo desarrollado específicamente para este trabajo tiene como objetivo construir la frontera eficiente mediante la iteración sobre distintos niveles de retorno esperado. Esto se logra definiendo un rango de retornos objetivo que evita valores extremos, estableciendo un intervalo entre el mínimo y el máximo de los retornos de los activos en cartera. De este modo, se generan todas las carteras que constituyen la frontera eficiente.
+
+En cada iteración, el algoritmo resuelve un problema de optimización para encontrar los pesos del portafolio que minimizan el riesgo asociado a un retorno objetivo específico. Este proceso incluye restricciones lineales que se expresan en la forma:
+
+$$
+A^\top \mathbf{b} \geq \mathbf{b}_0,
+$$
+
+donde:
+
+\begin{itemize}
+    \item $A^\top$ es la matriz que define las restricciones, como $\sum w_i = 1$ (suma de pesos).
+    \item $\mathbf{b}$ es el vector de pesos del portafolio.
+    \item $\mathbf{b}_0$ define los valores necesarios en un orden determinado, como $1$ para la suma de los pesos o $0$ para garantizar la no negatividad ($w_i \geq 0$).
+\end{itemize}
+
+De manera específica, estas restricciones aseguran que:
+
+\begin{enumerate}
+    \item Los pesos deben ser no negativos ($w_i \geq 0$), garantizando que no se realicen posiciones cortas.
+    \item La suma de los pesos debe ser igual a uno ($\sum_{i=1}^n w_i = 1$), asegurando la plena inversión del capital.
+\end{enumerate}
+
+Adicionalmente, el algoritmo incluye una tercera restricción, que establece que:
+
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item El retorno esperado del portafolio debe coincidir con el retorno objetivo establecido para esa iteración.
+\end{enumerate}
+
+Esta última restricción es fundamental para generar la frontera eficiente, ya que permite iterar sobre diferentes niveles de retorno esperado y calcular las combinaciones óptimas de riesgo y peso para cada uno. En el caso del modelo Black-Litterman, estas restricciones son esenciales para garantizar un portafolio válido bajo la configuración \textit{long only}.
+
+Así pues, se procede a mostrar los resultados.
+
+\clearpage
+
+\section{Resultados} \label{resultados_BL}
+
+Una vez obtenidos los puntos de la frontera eficiente, así como los distintos pesos de los activos, rentabilidades y riesgo de la frontera eficiente del mercado y de la frontera eficiente de Black-Litterman, se pueden mostrar los resultados obtenidos.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{TFG/Imagenes TFG/grafico_frontera_BL.png}
+    \caption{Frontera eficiente del mercado y de Black-Litterman}
+    \label{fig:frontera_eficiente_BL}
+    \vspace{0.7em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+En la \cref{fig:frontera_eficiente_BL}, se aprecia que valores como DJCO, con una opinión positiva respecto a BAC del 15\% anualizado, incrementan significativamente su rentabilidad esperada, mientras que la de BAC se ve impactada. Asimismo, activos como RACE y AXP mejoran su rentabilidad esperada, mientras que MCO pierde terreno y BABA registra una caída de rentabilidad esperada considerable. Un caso especialmente relevante es GOOGL, que recibió una opinión positiva asignándole un 10\% anualizado por encima de SRG. Sin embargo, a pesar de esta valoración, su rentabilidad esperada ajustada resulta ser menor. Este comportamiento se explica por las altas correlaciones de GOOGL con otros activos de la cartera, que inducen una mayor "dependencia" de su evolución respecto al resto. Como consecuencia, la matriz de incertidumbre \(\Omega\) asocia un mayor peso a la incertidumbre de las opiniones sobre GOOGL, siendo esta también el mayor valor, penalizando su rentabilidad esperada ajustada y aumentando ligeramente su volatilidad esperada.
+
+De manera similar, activos como MA y MU, que no tienen opiniones explícitas en el modelo, también sufren ajustes debido a sus elevadas correlaciones con el resto de activos de la cartera. Aunque estas correlaciones no reflejan directamente una opinión explícita, las interrelaciones del portafolio producen una redistribución en las rentabilidades y las volatilidades esperadas de los activos sobre los que se tiene opinión formada y de aquellos que tienen correlación directa con éstos. En el caso de MA y MU, la influencia de los activos correlacionados provoca una ligera reducción en su rentabilidad esperada y un incremento en su volatilidad proyectada.
+
+Este comportamiento evidencia cómo el modelo de Black-Litterman no solo impacta directamente en los activos sobre los que se tienen opiniones explícitas, sino que también afecta de forma indirecta a los demás activos en función de las correlaciones del mercado. Esto refleja una característica clave del modelo: aunque las opiniones se incorporen de forma individual, el sistema integrado del portafolio traduce estas opiniones en ajustes globales, respetando la estructura de correlaciones y optimizando el equilibrio entre riesgo y retorno.
+
+Respecto a los portafolios de las fronteras, se observa que las carteras de mínimo riesgo del mercado y de Black-Litterman presentan el mismo nivel de riesgo. Ambas carteras tienen una frontera eficiente similar, exceptuando por el tramo final, donde la rentabilidad penalizada de GOOGL provoca un ligero hundimiento de la frontera eficiente de Black-Litterman. Por ende, se aprecian diferencias entre el punto óptimo de cada una de las fronteras, siendo este el Sharpe óptimo de cada cartera.
+
+A continuación, se muestra la composición de activos de cada una de las dos carteras.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.465\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/composicion_mercado.png}
+        \caption{Composición de los portafolios frontera de mercado}
+        \label{fig:composicion_mercado}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.525\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/composicion_mercado_BL.png}
+        \caption{Composición de los portafolios frontera de Black-Litterman}
+        \label{fig:composicion_mercado_BL}
+    \end{minipage}
+    \vspace{0.8em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+En este punto del trabajo, se hace evidente una de las principales limitaciones prácticas del modelo de mercado. Tal y como se observa en la \cref{fig:pesos_frontera_markowitz} y, en este caso, en la \cref{fig:composicion_mercado}, la optimización de Markowitz asigna pesos que evolucionan de forma lineal y abrupta a lo largo de la frontera. Inicialmente, los pesos de ciertos activos, como DJCO, crecen de manera rápida y lineal, lo cual podría interpretarse como un comportamiento lógico dentro de los parámetros del modelo. Sin embargo, en puntos específicos de la frontera, la tendencia de ciertos activos muestra cambios repentinos e inesperados. Además, se aprecia una evolución lineal de los pesos, con puntos en los que ocurren cambios abruptos. Este fenómeno carece de justificación práctica, ya que, en la realidad, los cambios en la asignación de activos tienden a ser más suaves, reflejando ajustes graduales a las expectativas del mercado y las características de los activos. Desde un punto de vista financiero u operativo, este comportamiento genera carteras poco robustas, ya que un ligero cambio en la rentabilidad objetivo de la cartera puede generar cambios significativos en su composición\footnote{Tal y como se ha explicado en la \cref{Limitaciones y Restricciones}.}.
+
+Los cambios drásticos en los pesos implican una alta sensibilidad del portafolio a pequeños cambios en las rentabilidades esperadas de los activos, lo que puede llevar a asignaciones de activos no deseables para los inversores. Por esta razón, la implementación del modelo Black-Litterman no solo permite al inversor incorporar sus opiniones sobre el futuro para una mejor asignación de activos, sino que también consigue que la evolución de la cartera resultante, al variar la rentabilidad esperada, sea menos lineal y abrupta, lo que da lugar a resultados más prácticos para el inversor, tal y como se muestra en la \cref{fig:composicion_mercado_BL}.
+
+En cuanto a las diferencias en la composición de las carteras a lo largo de la frontera eficiente, se observan cambios significativos debido a las opiniones y ajustes incorporados en el modelo de Black-Litterman. Se destaca una mayor asignación de peso a los activos con perspectivas de mayor rentabilidad esperada. Un caso relevante es el de RACE, que, al recibir un ajuste positivo en su rentabilidad esperada por parte del inversor, aumenta su peso en las carteras de mayor rentabilidad, mientras que en las carteras por debajo del punto de mínimo riesgo su peso se reduce significativamente. En comparación, la cartera de mercado asigna un peso más elevado a RACE en carteras subóptimas, pero disminuye su relevancia a medida que se prioriza la rentabilidad esperada. Otro ejemplo es la evolución del peso de GOOGL, que, aunque sigue ocupando una posición destacada en la cartera óptima, ve reducido su peso en comparación con la cartera de mercado. Esto puede atribuirse a las correlaciones del activo con otros componentes del portafolio, que limitan su protagonismo tras los ajustes del modelo. Por otro lado, DJCO experimenta un incremento considerable en su peso en casi todo el espectro de carteras, reflejando la incorporación de las opiniones positivas que benefician su rentabilidad esperada.
+
+En contraste, BABA sufre una penalización significativa que prácticamente elimina su presencia en las carteras eficientes, mientras que BAC, aunque menos afectado, también pierde peso de forma progresiva. Este último incluso queda completamente excluido en las carteras óptimas de la frontera eficiente.
+
+Por otro lado, es relevante analizar si las carteras construidas por Black-Litterman mejoran o no la concentración de las carteras del mercado.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{TFG/Imagenes TFG/IHH_plot.png}
+    \caption{Distribución del índice IHH a lo largo de ambas fronteras eficientes (excluyendo las carteras subóptimas).}
+    \label{fig:distribucion_IHH}
+    \vspace{0.7em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+Tal y como se puede analizar en la \cref{fig:distribucion_IHH}, no se observan diferencias aparentes en la distribución del índice IHH (Índice Herfindahl-Hirschman)\footnote{El IHH es el resultado de la suma de los pesos al cuadrado de los activos en cartera ($\text{IHH} = \sum_i^n x_i^2$.} a lo largo de ambas fronteras eficientes. Esto sugiere que, al menos en este caso, la concentración de los activos en las carteras se mantiene constante, pese a que puedan producirse cambios internos en la composición específica de los activos entre carteras. Aun así, se considera oportuno analizar detalladamente la composición de las carteras más relevantes de ambos modelos: la cartera de mínimo riesgo y la de máximo Sharpe.
+
+\FloatBarrier
+\begin{table}[h!]
+    \centering
+    \caption{Pesos de los activos en las 4 carteras y sus índices IHH}
+    \label{tab:pesos_activos_carteras_ihh}
+    \begin{tabular}{lcc|cc}
+        \hline
+        \textbf{Activo} & \multicolumn{2}{c|}{\textbf{Mínimo Riesgo (MR)}} & \multicolumn{2}{c}{\textbf{Máximo Sharpe (MS)}} \\
+        \cline{2-5}
+                       & \textbf{Mercado} & \textbf{BL} & \textbf{Mercado} & \textbf{BL} \\
+        \hline
+        AXP   & 0.0673 & 0.0672 & 0.0454 & 0.1110 \\
+        BAC   & 0.1685 & 0.1687 & 0.0895 & 0.0000 \\
+        MA    & 0.2270 & 0.2271 & 0.1334 & 0.0578 \\
+        RACE  & 0.1706 & 0.1705 & 0.0207 & 0.1863 \\
+        MU    & 0.0233 & 0.0233 & 0.0317 & 0.0033 \\
+        MCO   & 0.1363 & 0.1366 & 0.0240 & 0.0000 \\
+        DJCO  & 0.1540 & 0.1539 & 0.0007 & 0.1626 \\
+        BABA  & 0.0013 & 0.0014 & 0.0626 & 0.0000 \\
+        GOOGL & 0.0516 & 0.0512 & 0.5920 & 0.4791 \\
+        SRG   & 0.0000 & 0.0000 & 0.0002 & 0.0000 \\
+        \hline
+        \textbf{IHH} & 0.1591 & 0.1591 & 0.3843 & 0.3064 \\
+        \hline
+    \end{tabular}
+    \vspace{0.7em}
+    \break
+    \footnotesize \textit{Nota: MR = Mínimo Riesgo, MS = Máximo Sharpe, BL = Black-Litterman. Los pesos corresponden a cada activo en las 4 carteras analizadas. \\ Fuente: Elaboración propia (Rstudio)}
+\end{table}
+\FloatBarrier
+
+En la \cref{tab:pesos_activos_carteras_ihh}, en cada una de las 4 carteras se puede apreciar cómo las carteras de mínimo riesgo apenas sufren cambios, manteniendo ambas el mismo índice IHH\footnote{El mínimo índice IHH posible es $\frac{1}{n} = \frac{1}{10}$, por lo que un valor de IHH cercano indica una diversificación próxima al máximo teórico.} y conservando a 9 de los 10 activos en cartera, siendo SRG el único activo sin peso. Esto se debe a que la cartera de mínimo riesgo se construye exclusivamente para minimizar la varianza del portafolio y, pese a considerar las expectativas de rentabilidad ajustadas por las opiniones, dicha diversificación produce que aparezcan prácticamente todos los activos, incluso aquellos que están lejos de la cartera óptima, como GOOGL. Dado que el modelo de Black-Litterman no altera la matriz de covarianzas principal ($\Sigma$), determinante de esta cartera, los pesos asignados permanecen prácticamente inalterados. Las opiniones, aunque modifican los retornos esperados, no impactan directamente en la estructura de riesgos que define esta cartera.
+
+Por otro lado, donde sí se observan cambios significativos es en las carteras de máximo Sharpe, especialmente al comparar las composiciones de mercado y Black-Litterman. Tal y como se aprecia en la \cref{fig:composicion_mercado} y \cref{fig:composicion_mercado_BL}, las opiniones incorporadas generan variaciones notables en los pesos asignados a ciertos activos.
+
+Estas diferencias en las carteras de máximo Sharpe son el resultado de cómo el modelo de Black-Litterman ajusta las rentabilidades esperadas para incorporar información subjetiva (opiniones), redistribuyendo los pesos de los activos para maximizar el retorno ajustado por riesgo. Esto se traduce en un índice IHH mayor para la cartera de mercado, que refleja una mayor concentración en menos activos, mientras que la cartera de Black-Litterman logra una distribución más equilibrada, maximizando los beneficios de la diversificación.
+
+Por lo tanto, pese a que la \cref{fig:distribucion_IHH} muestra una distribución similar en el índice IHH, se consigue mejorar, al menos para este caso, la diversificación al aplicar Black-Litterman.
+
+\subsection{Comparativa de estrategias}
+
+Habiendo analizado la composición de cada una de las fronteras eficientes y las carteras de máximo Sharpe, conviene evaluar si las opiniones proporcionadas para este estudio han sido acertadas respecto a la realidad. Para ello, se ha analizado el período del 1 de enero de 2024 al 15 de enero de 2025\footnote{Fecha de finalización del período de simulación.} para testear ambas estrategias, siendo la primera los pesos de mercado de la cartera de máximo Sharpe y la segunda los pesos de la cartera de Black-Litterman.
+
+En primer lugar, es necesario evaluar la evolución de los pesos durante el año 2024 para las carteras de mercado y Black-Litterman con y sin rebalanceo. El rebalanceo se ha aplicado cada vez que el peso de cualquier activo en cartera se distancia un 3\% de su peso inicial\footnote{El autor ha decidido de forma subjetiva esta distancia, no se trata de un valor optimizado.}. Esto se realiza para ser fieles al peso inicial optimizado y compararlo con la cartera sin rebalanceo, donde la evolución de los pesos puede diferir de los pesos iniciales.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/Evolucion_peso_BL_sin.png}
+        \caption{Evolución de pesos de la cartera de BL: Sin rebalanceo}
+        \label{fig:evolucion_sin_rebalanceo}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/Evolucion_peso_BL_rebalanceo.png}
+        \caption{Evolución de pesos de la cartera de BL: Con rebalanceo}
+        \label{fig:evolucion_con_rebalanceo}
+    \end{minipage}
+    \vspace{0.7em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio).}
+\end{figure}
+\FloatBarrier
+
+En los gráficos de evolución de los pesos se aprecian diferencias significativas. Por una parte, el gráfico de la \cref{fig:evolucion_sin_rebalanceo} muestra una fluctuación considerable en la evolución de los pesos, lo que, en un caso práctico, podría llevar al inversor a preferir rebalancear la cartera. Por ello, el gráfico de la \cref{fig:evolucion_con_rebalanceo} muestra una evolución mucho más constante debido a los rebalanceos realizados. Durante todo el período se han efectuado 7 rebalanceos, lo que ha permitido una mayor estabilidad en la evolución de la cartera.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/Evolucion_peso_mercado_sin.png}
+        \caption{Evolución de pesos en el mercado: Sin rebalanceo}
+        \label{fig:evolucion_mercado_sin_rebalanceo}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/Evolucion_peso_mercado_reb.png}
+        \caption{Evolución de pesos en el mercado: Con rebalanceo}
+        \label{fig:evolucion_mercado_con_rebalanceo}
+    \end{minipage}
+    \vspace{0.8em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio).}
+\end{figure}
+\FloatBarrier
+
+En este caso, las carteras de mercado también sufren la misma dinámica que las de Black-Litterman, principalmente debido a la similitud en la composición de activos.
+
+En el caso de la cartera rebalanceada, el total de rebalanceos durante el período de estudio es de 4, lo que indica una menor necesidad de modificaciones en la composición de la cartera.
+
+Es necesario estudiar la rentabilidad global de cada una de las carteras analizadas. Para las carteras rebalanceadas, se ha aplicado una comisión simulada del 1\% sobre la proporción de los activos en cartera que han requerido rebalanceo. Por ello, en la \cref{tab:resultados_carteras} se presentan tanto las rentabilidades brutas, es decir, sin considerar el impacto de las comisiones, como las rentabilidades netas, que reflejan un escenario más realista al incluir el coste del rebalanceo.
+
+\FloatBarrier
+\begin{table}[h!]
+    \centering
+    \caption{Resultados Comparativos de las Carteras Analizadas}
+    \label{tab:resultados_carteras}
+    \resizebox{\textwidth}{!}{ % Ajustar al ancho de la página
+    \begin{tabular}{lccccccc}
+        \hline
+        \multirow{\textbf{Tipo de cartera}} & \multicolumn{4}{c}{\textbf{Rebalanceo}} & \multicolumn{2}{c}{\textbf{Sin Rebalanceo}} & \multirow{\textbf{SP500}} \\
+        \cline{2-7}
+         & \textbf{Mercado Bruta} & \textbf{Mercado Neta} & \textbf{BL Bruta} & \textbf{BL Neta} & \textbf{Mercado} & \textbf{BL} \\
+        \hline
+        Rentabilidad Total (\%)  & 41.10 & 40.69 & 49.11 & 47.70 & 39.39 & 45.99 & 22.17 \\
+        Volatilidad (\%)          & 19.37 & 19.37 & 19.85 & 19.78 & 19.46 & 19.85 & 12.72 \\
+        Riesgo a la Baja (\%)     & 13.16 & 13.16 & 13.04 & 13.07 & 13.29 & 13.09 & 8.96  \\
+        Máxima Pérdida (\%)       & 12.08 & 12.15 & 9.04  & 9.18  & 13.02 & 9.37  & 8.62  \\
+        Pérdida Media (\%)     & 2.89  & 2.91  & 1.61  & 1.64  & 3.17  & 1.65  & 1.28  \\
+        Alfa (\%)                 & 17.64 & 17.23 & 23.40 & 22.06 & 15.69 & 20.10 & 0.00  \\
+        Beta                      & 1.08  & 1.08  & 1.21  & 1.12  & 1.09  & 1.22  & -     \\
+        \hline
+    \end{tabular}
+    }
+    \vspace{0.7em} 
+\end{table}
+\FloatBarrier
+
+En los resultados presentados, las carteras basadas en el modelo de Black-Litterman (BL) destacan por su superioridad en términos de rentabilidad ajustada por riesgo. La rentabilidad total de las carteras de BL, tanto bruta (49.11\%) como neta (47.70\%), supera significativamente a las carteras del mercado, que alcanzan un máximo de 41.10\% en su versión bruta.
+
+En cuanto a la volatilidad, todas las carteras, excepto el S\&P 500 (12.72\%), muestran valores similares alrededor del 19\%, reflejando niveles de riesgo comparables. Sin embargo, las carteras BL logran un menor riesgo a la baja (13.04\%-13.07\%) y menores pérdidas acumuladas, como lo demuestran sus máximos \textit{drawdowns} (9.04\%-9.18\%) frente a las carteras del mercado (12.08\%-12.15\%).
+
+Por último, las carteras de BL generan los valores de $\alpha$ más elevados, con un máximo de 23.40\% en la versión bruta, mientras que las carteras del mercado alcanzan valores de $\alpha$ de hasta 17.64\%. Esto posiciona al modelo de Black-Litterman como una estrategia claramente más eficiente en términos de retorno y manejo del riesgo.
+
+Gráficamente, la evolución de las carteras es la siguiente.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{TFG/Imagenes TFG/Comparacion_rentabilidades_carteras.png}
+    \caption{Evolución de las carteras seleccionadas durante el período de estudio.}
+    \label{fig:evolucion_carteras}
+    \vspace{0.7em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+\clearpage
+
+\section{Aplicación de Black-Litterman con covarianzas de Gerber}
+
+Una vez analizado el algoritmo desarrollado para la optimización de portafolios en el marco del modelo Black-Litterman y presentados los resultados correspondientes, se procede a implementar una variante del modelo que incorpora el estadístico de Gerber en la metodología. Este enfoque busca mejorar la robustez de las estimaciones de riesgo al considerar de forma más precisa la co-movilidad entre activos en el portafolio.
+
+La motivación principal detrás de esta implementación radica en las limitaciones inherentes al uso de matrices de covarianza tradicionales, especialmente cuando se trabaja con portafolios altamente diversificados. El método de Gerber ofrece una alternativa que suaviza la estimación de covarianzas, reduciendo el impacto de posibles errores de muestreo y el ruido, mejorando así la estabilidad del modelo optimizado.
+
+Inicialmente, tal y como se ha explicado en la \cref{Estadístico de Gerber} \hyperref[Estadístico de Gerber]{Estadístico de Gerber}, se define $c$ para obtener $H_k$ y así calcular los valores $m_{ij}$, con el fin de determinar $G_{ij}$ y construir $\Sigma_{\text{Gerber}}$, que sustituye la matriz de covarianzas tradicional $\Sigma$ en la implementación del proceso Black-Litterman. Esta matriz ajustada incorpora no solo la varianza histórica de los activos, sino también patrones estructurales en los datos, eliminando el ruido y reflejando de manera más realista la interacción entre los mismos.
+
+Tal y como se ha mencionado en la \cref{Estadístico de Gerber} \hyperref[Estadístico de Gerber]{Estadístico de Gerber}, en este trabajo se ha decidido implementar $c=0.5$\footnote{Ver \cref{Estadístico de Gerber}. Valor recomendado por Gerber, Markowitz y Pujara (2022).}, por lo que la matriz de covarianzas queda representada visualmente en la \cref{fig:Gerber_05} de la siguiente forma:
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{TFG/Imagenes TFG/Gerber_05.png}
+    \caption{Grafico de las rentabilidades diarias clasificadas con $c=0.5$.}
+    \label{fig:Gerber_05}
+    \vspace{0.7em}
+    \footnotesize \textit{\textit{Nota: N = Negativo, A = Neutro, P = Positivo.} \\ Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+Tal y como se ha explicado en la \cref{Estadístico de Gerber} \hyperref[Estadístico de Gerber]{Estadístico de Gerber}, la clasificación se utiliza para identificar co-movimientos significativos entre activos, excluyendo fluctuaciones menores. Esto se refleja en los recuadros AP, NA, AA, PA y AN. Por ejemplo, el recuadro superior izquierdo muestra que, tras aplicar el estadístico de Gerber, los puntos de ese recuadro alcanzan el límite superior definido por Gerber en ambas $\sigma$. Esto indica una rentabilidad negativa para AXP y una rentabilidad positiva para BAC, lo que lleva a asignar un valor de $-1$ a $m_{ij}(t)$\footnote{Tal y como se muestra en la \cref{tab:movimientos_explicacion_gerber}.}.
+
+Por lo tanto, la matriz de correlaciones entre los activos aplicando el estadístico de Gerber es la siguiente.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{TFG/Imagenes TFG/correlacion_gerber_activos_SP500.png}
+    \caption{Correlación entre activos de la cartera y el S\&P500 aplicando $c=0.5$}
+    \label{fig:cov_matrix_gerber}
+    \vspace{0.7em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+Tal y como se puede apreciar en el gráfico de la \cref{fig:cov_matrix_gerber}, el uso del estadístico de Gerber reduce la correlación entre los activos de la cartera y el $S\&P500$, disminuyendo la dependencia estimada entre activos y destacando ligeramente las más relevantes. Un ejemplo sería $MU$ y $RACE$, donde una menor correlación implica una mayor independencia y, por lo tanto, una mayor diversificación y menor redundancia en los riesgos asumidos.
+
+Además, el estadístico de Gerber cumple su objetivo principal de reducir el posible ruido de estimación causado por errores o dependencias espurias, mejorando la fiabilidad estructural de la optimización del portafolio. A pesar de ello, se aprecia cómo la estructura de las correlaciones y las covarianzas sigue siendo similar a la obtenida con las covarianzas convencionales.
+
+Se procede entonces a realizar una comparación entre el proceso de optimización, construcción y testeo de las carteras óptimas de mercado y de Black-Litterman, usando como $\Sigma$ la matriz de covarianzas transformada a través del estadístico de Gerber.
+
+\clearpage
+\subsubsection*{Comparación de resultados con y sin el estadístico de Gerber}
+
+Primeramente, es necesario recalcar que $\tau$, $\lambda$, $P$ y $Q$ no se modifican en esta parte del estudio con el objetivo de asegurar una base comparable. Aun así, se reproducen los cálculos usados para la construcción de $\mu_{BL}$ y $\Sigma_{BL}$ para la posterior optimización. Por lo tanto, es necesario recalcular $\Pi$. Por lo tanto:
+
+\FloatBarrier
+$$
+\Pi = \lambda \Sigma_{\text{Gerber}} w_m =
+$$
+
+$$
+= 2.23 \times 
+\begin{bmatrix}
+3.602341 \times 10^{-4} & 1.139096 \times 10^{-4} & \cdots & 1.538518 \times 10^{-4} \\
+1.139096 \times 10^{-4} & 3.207530 \times 10^{-4} & \cdots & 1.328410 \times 10^{-4} \\
+\vdots & \vdots & \ddots & \vdots \\
+1.538518 \times 10^{-4} & 1.328410 \times 10^{-4} & \cdots & 1.587352 \times 10^{-3}
+\end{bmatrix}
+\times
+\begin{bmatrix}
+4.53240375 \\ % AXP
+8.91925482 \\ % BAC
+13.30411203 \\ % MA
+2.01514014 \\ % RACE
+3.17291524 \\ % MU
+2.35941540 \\ % MCO
+0.01561867 \\ % DJCO
+6.27870345 \\ % BABA
+59.38482397 \\ % GOOGL
+0.01761254 % SRG
+\end{bmatrix}
+=
+\begin{bmatrix}
+0.0004733622 \\ % AXP
+0.0004364140 \\ % BAC
+0.0004734654 \\ % MA
+0.0004351413 \\ % RACE
+0.0005623498 \\ % MU
+0.0004566977 \\ % MCO
+0.0003735658 \\ % DJCO
+0.0007022773 \\ % BABA
+0.0009419059 \\ % GOOGL
+0.0005190703 % SRG
+\end{bmatrix}.
+$$
+\FloatBarrier
+
+
+
+Así pues, dado que las opiniones son las mismas en este caso, se prosigue calculando $\Omega$:
+
+\[
+\Omega =
+\begin{bmatrix}
+3.406367 \times 10^{-5} & 0 & 0 & 0 \\
+0 & 1.048301 \times 10^{-5} & 0 & 0 \\
+0 & 0 & 1.654336 \times 10^{-5} & 0 \\
+0 & 0 & 0 & 4.364179 \times 10^{-5}
+\end{bmatrix}.
+\]
+\FloatBarrier
+
+Habiendo calculado $\Omega$, se procede a calcular $\mu_{BL}$ y $\Sigma_{BL}$ y a la posterior optimización de los pesos para la obtención de la frontera eficiente y las carteras de mínima varianza y máximo Sharpe Ratio.
+
+\FloatBarrier
+$$
+\mu_{\text{BL}} =
+\begin{bmatrix}
+0.02436428 \\ % AXP
+0.01905602 \\ % BAC
+0.02494612 \\ % MA
+0.01818348 \\ % RACE
+0.03044187 \\ % MU
+0.01880089 \\ % MCO
+0.01587519 \\ % DJCO
+0.03144352 \\ % BABA
+0.05816840 \\ % GOOGL
+0.04138689 % SRG
+\end{bmatrix}.
+$$
+\FloatBarrier
+
+\FloatBarrier
+$$
+\Sigma_{\text{BL}} =
+\begin{bmatrix}
+3.684322 \times 10^{-4} & 1.163891 \times 10^{-4} & \cdots & 1.569351 \times 10^{-4} \\
+1.163891 \times 10^{-4} & 3.274345 \times 10^{-4} & \cdots & 1.352992 \times 10^{-4} \\
+\vdots & \vdots & \ddots & \vdots \\
+1.569351 \times 10^{-4} & 1.352992 \times 10^{-4} & \cdots & 1.611628 \times 10^{-3}
+\end{bmatrix}.
+$$
+\FloatBarrier
+
+Habiendo calculado ya $\mu_{BL}$ y $\Sigma_{BL}$, se procede a la optimización de los riesgos y retornos para la obtención de la frontera eficiente, obteniendo el siguente resultado.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{TFG/Imagenes TFG/Grafico_frontera_BL_Gerber.png}
+    \caption{Frontera eficiente del mercado y de Black-Litterman usando el estadístico de Gerber}
+    \label{fig:frontera_eficiente_BL_Gerber}
+    \vspace{0.7em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+Existen ciertas diferencias en los resultados obtenidos mediante el ajuste de Gerber y los resultados de la \cref{resultados_BL} \hyperref[resultados_BL]{resultados BL}. En primer lugar, el factor diferenciador más relevante es el desplazamiento de la curva en el eje del riesgo. Dado que el estadístico de Gerber reduce la covarianza entre los activos, disminuye el riesgo percibido por cada activo. Por ejemplo, la cartera de mínimo riesgo tiene un riesgo $\sigma = 0.011$, mientras que el riesgo equivalente en la cartera de mínimo riesgo sin implementar el estadístico de Gerber en la \cref{fig:frontera_eficiente_BL} es de $\sigma = 0.014$. Aun así, la estructura de las fronteras y la distribución de las rentabilidades y riesgos de cada activo permanecen prácticamente sin variaciones.
+
+Sin embargo, es posible detectar algunas alteraciones, como en la parte inferior no eficiente de la frontera, que finaliza en BABA, siendo este el activo con menor rentabilidad esperada en comparación con el caso anterior. Otro ligero movimiento perceptible es la posición de BAC, aunque estas variaciones son prácticamente insignificantes.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/composicion_mercado_Gerber.png}
+        \caption{Composición del portafolio de Mercado usando Gerber}
+        \label{fig:Composicion_mercado_Gerber}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/composicion_mercado_BL_Gerber.png}
+        \caption{Composición del portafolio de BL usando Gerber}
+        \label{fig:Composicion_mercado_BL_Gerber}
+    \end{minipage}
+    \\
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+
+En cuanto a la distribución de los pesos, se aprecia que la estructura de esta es muy similar a la de las fronteras eficientes sin la matriz de covarianza de Gerber (\cref{fig:composicion_mercado} y \cref{fig:composicion_mercado_BL}). No parece que la aplicación del estadístico de Gerber tenga un impacto significativo en la distribución de los pesos de los activos en los distintos portafolios de mercado y Black-Litterman.
+
+Se procede a analizar las distintas distribuciones de los pesos de ambas carteras de máximo Sharpe para identificar las posibles alteraciones en los pesos de dichas carteras.
+
+Inicialmente, se presentan los resultados visuales de la clasificación de cada una de las $c$.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/Gerber_01.png}
+        \caption{Gráfico de las rentabilidades diarias clasificadas con $c=0.1$.}
+        \label{fig:Gerber_01}
+        \vspace{0.7em}
+        \footnotesize \textit{Nota: N = Negativo, A = Neutro, P = Positivo. \\ Fuente: Elaboración propia (Rstudio).}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/Gerber_03.png}
+        \caption{Gráfico de las rentabilidades diarias clasificadas con $c=0.2$.}
+        \label{fig:Gerber_03}
+        \vspace{0.7em}
+        \footnotesize \textit{Nota: N = Negativo, A = Neutro, P = Positivo. \\ Fuente: Elaboración propia (Rstudio).}
+    \end{minipage}
+\end{figure}
+\FloatBarrier
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/Gerber_07.png}
+        \caption{Gráfico de las rentabilidades diarias clasificadas con $c=0.7$.}
+        \label{fig:Gerber_07}
+        \vspace{0.7em}
+        \footnotesize \textit{Nota: N = Negativo, A = Neutro, P = Positivo. \\ Fuente: Elaboración propia (Rstudio).}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{TFG/Imagenes TFG/Gerber_09.png}
+        \caption{Gráfico de las rentabilidades diarias clasificadas con $c=0.9$.}
+        \label{fig:Gerber_09}
+        \vspace{0.7em}
+        \footnotesize \textit{Nota: N = Negativo, A = Neutro, P = Positivo. \\ Fuente: Elaboración propia (Rstudio).}
+    \end{minipage}
+\end{figure}
+\FloatBarrier
+
+A medida que $c$ aumenta en el estadístico de Gerber, los límites para considerar las rentabilidades se estrechan, clasificando más puntos como ruido blanco ($m_{ij} = 0$). Esto reduce la influencia de dependencias espurias entre activos, pero también puede eliminar relaciones estructurales al considerarlas ruido blanco, lo que podría llevar a clasificar la relación entre activos como independiente cuando en realidad no lo es. Por ende, la matriz de covarianza no necesariamente resulta más precisa, aunque podría favorecer una mayor diversificación.
+
+\FloatBarrier
+\begin{table}[h!]
+    \centering
+    \caption{Proporción de la Matriz de Gerber respecto a la Covarianza Normal}
+    \label{tab:proporcion_gerber}
+    \begin{tabular}{lccccccccc}
+        \hline
+        \textbf{\(c\)} & \textbf{AXP} & \textbf{BAC} & \textbf{MA} & \textbf{RACE} & \textbf{MU} & \textbf{MCO} & \textbf{DJCO} & \textbf{BABA} & \textbf{GOOGL} \\
+        \hline
+        0.1 & 1.0000 & 0.8186 & 0.7020 & 0.6389 & 0.7241 & 0.7462 & 0.5538 & 0.6293 & 0.7770 \\
+        0.3 & 1.0000 & 0.6478 & 0.6174 & 0.5854 & 0.5841 & 0.6709 & 0.6511 & 0.7996 & 0.7032 \\
+        0.5 & 1.0000 & 0.4918 & 0.5014 & 0.4890 & 0.4761 & 0.5633 & 0.5538 & 0.5923 & 0.5599 \\
+        0.7 & 1.0000 & 0.3416 & 0.3573 & 0.3355 & 0.3361 & 0.3839 & 0.3043 & 0.4294 & 0.3603 \\
+        0.9 & 1.0000 & 0.2326 & 0.2413 & 0.2356 & 0.2520 & 0.2798 & 0.2130 & 0.2295 & 0.2214 \\
+        \hline
+    \end{tabular}
+    \vspace{0.5em}
+    \footnotesize \\ \textit{Fuente: Elaboración propia (Rstudio).}
+\end{table}
+\FloatBarrier
+
+El \cref{tab:proporcion_gerber} muestra como, para el valor de AXP, las covarianzas se reducen para todos los activos a medida que el valor de $c$ aumenta (\cref{fig:Gerber_01}, \cref{fig:Gerber_03}, \cref{fig:Gerber_07} y \cref{fig:Gerber_09}).
+
+Así pues, se procede al análisis de los pesos resultantes de las carteras de mercado y de BL para $c$ = {0.1,0.3,0.5,0.7,0.9}.
+
+\FloatBarrier
+\begin{table}[h!]
+    \centering
+    \caption{Pesos de los Activos en Diferentes Escenarios (Mercado)}
+    \label{tab:pesos_mercado}
+    \begin{tabular}{lccccc}
+        \hline
+        \textbf{Activo} & \textbf{c = 0.1} & \textbf{c = 0.3} & \textbf{c = 0.5} & \textbf{c = 0.7} & \textbf{c = 0.9} \\
+        \hline
+        AXP   & 4.53\%  & 4.53\%  & 4.54\%  & 4.57\%  & 4.52\%  \\
+        BAC   & 8.91\%  & 8.89\%  & 8.95\%  & 8.96\%  & 8.91\%  \\
+        MA    & 13.29\% & 13.27\% & 13.34\% & 13.36\% & 13.29\% \\
+        RACE  & 2.00\%  & 1.97\%  & 2.07\%  & 2.12\%  & 1.99\%  \\
+        MU    & 3.18\%  & 3.18\%  & 3.17\%  & 3.17\%  & 3.17\%  \\
+        MCO   & 2.35\%  & 2.33\%  & 2.40\%  & 2.44\%  & 2.33\%  \\
+        DJCO  & 0.00\%  & 0.00\%  & 0.07\%  & 0.12\%  & 0.00\%  \\
+        BABA  & 6.28\%  & 6.29\%  & 6.26\%  & 6.24\%  & 6.29\%  \\
+        GOOGL & 59.44\% & 59.51\% & 59.20\% & 58.98\% & 59.49\% \\
+        SRG   & 0.02\%  & 0.02\%  & 0.02\%  & 0.03\%  & 0.01\%  \\
+        \hline
+        \textbf{IHH} & 0.3869 & 0.3876 & 0.3843 & 0.3818 & 0.3875 \\
+        \hline
+    \end{tabular}
+    \vspace{0.5em}
+    \\
+    \footnotesize \textit{Nota: Todas las carteras corresponden al máximo ratio de Sharpe.} \\
+    \textit{Fuente: Elaboración propia (Rstudio).}
+\end{table}
+\FloatBarrier
+
+\FloatBarrier
+\begin{table}[h!]
+    \centering
+    \caption{Pesos de los Activos en Diferentes Escenarios (Black-Litterman)}
+    \label{tab:pesos_bl}
+    \begin{tabular}{lccccc}
+        \hline
+        \textbf{Activo} & \textbf{c = 0.1} & \textbf{c = 0.3} & \textbf{c = 0.5} & \textbf{c = 0.7} & \textbf{c = 0.9} \\
+        \hline
+        AXP   & 7.46\%  & 9.79\%  & 11.06\% & 11.85\% & 12.00\% \\
+        BAC   & 0.00\%  & 0.00\%  & 0.00\%  & 0.00\%  & 0.00\%  \\
+        MA    & 2.30\%  & 2.35\%  & 4.75\%  & 7.05\%  & 8.03\%  \\
+        RACE  & 21.91\% & 22.40\% & 19.89\% & 17.68\% & 16.75\% \\
+        MU    & 0.00\%  & 0.00\%  & 0.00\%  & 0.46\%  & 0.71\%  \\
+        MCO   & 0.00\%  & 0.00\%  & 0.00\%  & 0.00\%  & 0.00\%  \\
+        DJCO  & 19.55\% & 18.74\% & 17.45\% & 16.66\% & 15.89\% \\
+        BABA  & 0.00\%  & 0.00\%  & 0.00\%  & 0.00\%  & 0.00\%  \\
+        GOOGL & 48.78\% & 46.72\% & 46.85\% & 46.30\% & 46.25\% \\
+        SRG   & 0.00\%  & 0.00\%  & 0.00\%  & 0.00\%  & 0.37\%  \\
+        \hline
+        \textbf{IHH} & 0.3303 & 0.3137 & 0.3040 & 0.2924 & 0.2881 \\
+        \hline
+    \end{tabular}
+    \vspace{0.5em}
+    \\
+    \footnotesize \textit{Nota: Todas las carteras corresponden al máximo ratio de Sharpe.} \\
+    \textit{Fuente: Elaboración propia (Rstudio).}
+\end{table}
+\FloatBarrier
+
+En los resultados del \cref{tab:pesos_mercado} y \cref{tab:pesos_bl} se observan diferencias en la estabilidad de los pesos óptimos asignados a los activos entre las carteras de mercado y las de Black-Litterman.
+
+En primer lugar, en las carteras de mercado se aprecia una gran estabilidad en cuanto a la asignación de pesos. Esto sugiere que las carteras resultan prácticamente independientes del valor de \(c\) y que, aun con los ajustes realizados mediante el estadístico de Gerber, no se altera la estructura de los resultados de $\Pi$ o $\mu_{BL}$.
+
+Por otro lado, las carteras de Black-Litterman muestran mayor sensibilidad al ajuste de Gerber, especialmente a medida que aumenta el valor de \(c\). Este fenómeno se debe a la incorporación de las opiniones del inversor (representadas en las matrices \(P\) y \(Q\)) en el modelo de BL, que interactúan directamente con la matriz de covarianza ajustada. Cuando \(c\) es bajo, el impacto del ajuste es marginal, resultando en pesos cercanos a los obtenidos mediante la matriz de covarianza estándar. Sin embargo, conforme \(c\) incrementa, el modelo BL redistribuye los pesos hacia activos con mayor correlación ajustada, modificando el impacto de las opiniones. Un ejemplo de esto es el comportamiento de activos como AXP y RACE, cuyos pesos aumentan considerablemente en escenarios con \(c\) elevado. En contraste, DJCO ve sus pesos reducidos, mientras que GOOGL únicamente experimenta una ligera reducción en su peso.
+
+Además, existe una mejora continua en las carteras de BL en relación al IHH, dado que al aumentar \(c\) se asume una mayor independencia entre los activos y, por consiguiente, se redistribuyen más equitativamente los pesos, alcanzando un IHH $= 0.2881$ en la cartera con \(c = 0.9\), que asume casi total independencia entre los activos.
+
+Se concluye que el modelo BL tiene sensibilidad al parámetro \(c\), diversificandose especialmente para valores elevados de $c$. Por otro lado, no se aprecian cambios relevantes en los distintos portafolios de mercado.
+
+\clearpage
+\subsection{Evaluación de las distintas carteras de Black-Litterman aplicando Gerber}
+
+Una vez estudidada la composición de activos de cada cartera, se simula la evolución de la misma de igual forma que en los casos anteriores. Los resultados son los siguientes.
+
+\FloatBarrier
+\begin{table}[h!]
+    \centering
+    \caption{Resultados Comparativos para Diferentes Valores de $c$}
+    \label{tab:resultados_c_valores}
+    \begin{tabular}{lcccccc}
+        \hline
+        \textbf{Métrica} & \textbf{\(c = 0.1\)} & \textbf{\(c = 0.3\)} & \textbf{\(c = 0.5\)} & \textbf{\(c = 0.7\)} & \textbf{\(c = 0.9\)} & \textbf{\(S\&P500\)} \\
+        \hline
+        Rentabilidad Total (\%) & 47.30 & 48.06 & 48.36 & 48.19 & 47.86 & 24.39 \\
+        Volatilidad (\%)        & 20.52 & 20.24 & 19.83 & 19.59 & 19.44 & 12.82 \\
+        Riesgo a la Baja (\%)   & 13.54 & 13.31 & 13.08 & 12.92 & 12.80 & 8.96  \\
+        Máxima Pérdida (\%)     & 9.22  & 8.97  & 9.07  & 9.10  & 9.03  & 8.62  \\
+        Pérdida Media (\%)      & 1.72  & 1.66  & 1.62  & 1.60  & 1.59  & 1.28  \\
+        \hline
+    \end{tabular}
+    \vspace{0.5em}
+    \\
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio).}
+\end{table}
+\FloatBarrier
+
+El \cref{tab:resultados_c_valores} muestra que las variaciones en el valor de $c$ no generan cambios notables en la rentabilidad total ni en la volatilidad de las carteras.  Aunque el valor de $c$ influya ligeramente en la distribución de los pesos de los activos, su impacto sobre la rentabilidad global de las carteras es marginal. Asimismo, las métricas adicionales también mantienen estabilidad.
+
+Por último, la representación gráfica de la evolución es la siguiente.
+
+\FloatBarrier
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{TFG/Imagenes TFG/Comparacion_rentabilidades_c.png}
+    \caption{Evolución de las carteras optimizadas mediante Black-Litterman utilizando el ajuste de Gerber durante el período de estudio.}
+    \label{fig:rentabilidades_BL_Gerber}
+    \vspace{0.7em}
+    \footnotesize \textit{Fuente: Elaboración propia (Rstudio)}
+\end{figure}
+\FloatBarrier
+\clearpage
+
+Se puede apreciar que, a pesar de existir ciertas variaciones a lo largo del período, las carteras se comportan casi idénticamente, por lo que se concluye que la diferenciación de $c$ al aplicar el estadístico de Gerber, más allá de reducir ligeramente el IHH y brindar mayor diversificación que las carteras de BL construidas con la matriz de covarianzas convencional, no genera mayores rendimientos\footnote{Las conclusiones son únicamente aplicables al caso estudiado y no constituyen una generalización a otros escenarios, con otros activos, valores de $\tau$, opiniones o períodos analizados, pudiendo variar en otros contextos.}.
+
+\clearpage
+
+\chapter{CONCLUSIONES}
+
+\epigraph{\textit{The stock market is filled with individuals who know the price of everything but the value of nothing.}}{\textit{Phillip Fisher}}
+
+\bigskip
+
+Una vez presentados todos los resultados del trabajo, se pueden extraer diversas conclusiones referentes a los objetivos planteados inicialmente.
+
+En primer lugar, respecto a la teoría de los mercados eficientes (EMT), la existencia de sesgos (\cref{Behavioral finance} \hyperref[Behavioral finance]{Behavioral finance}) en la conducta humana, tales como el sesgo de localización o el de disponibilidad\footnote{Ver \cref{Sesgos}.}, invalidan la premisa que supone la racionalidad de los inversores. Además, como se ha discutido en la \cref{Otras críticas} \hyperref[Otras críticas]{Otras críticas}, la EMT no se cumple de manera consistente en el corto plazo, donde se observan anomalías de mercado y comportamientos especulativos que pueden generar ineficiencias temporales. Además, aunque dichas ineficiencias pudieran deberse a una anticipación irracional de los inversores a sucesos o cambios estructurales del mercado, la EMT tampoco se cumpliría, pues los inversores profesionales y expertos serían capaces de generar $\alpha$. Por otro lado, la existencia de la reversión a la media, demostrada en la \cref{Reversion a la media} \hyperref[Reversion a la media]{Reversión a la media}, sugiere que, a largo plazo, los precios tienden a corregirse y reflejar el valor fundamental de los activos, apoyando parcialmente los principios de la EMT en horizontes temporales más largos y siendo más consistente la definición de la ''Adaptive Market Theory'' (\cref{Conclusiones finales} \hyperref[Conclusiones finales]{Argumentos finales}).
+
+Respecto a la propia eficiencia práctica del mercado, en la \cref{ETFs} \hyperref[ETFs]{ETFs} se presentan las ventajas de la gestión pasiva indexada, un vehículo de inversión simple para inversores con poco conocimiento que, considerando la influencia de \cref{Reversion a la media} \hyperref[Reversion a la media]{Reversión a la media} y comprendiendo la dificultad de generar $\alpha$ (ver \cref{fig:mutual_funds_survival} y \cref{tab:EquityFunds_vs_Index}), dicha indexación resulta muy beneficiosa, incluso para inversores expertos, pese a la pérdida de la adaptabilidad. Por ello, a pesar de las críticas a la EMT, las estrategias pasivas siguen demostrando ser eficaces en horizontes temporales largos, por lo que si un inversor profesional pretende generar $\alpha$ debe realizar una selección de activos cuidadosa basada en una identificación clara de oportunidades o anomalías de mercado, donde el mercado pueda no ser completamente eficiente en el corto plazo y el precio del activo difiera en gran medida del valor. Así, en el largo plazo, la reversión a la media y la corrección de las ineficiencias permitirán tener un exceso de rentabilidad.
+
+Es por eso que, como herramienta de análisis del mercado y reducción de sesgos, la implementación de los roboadvisors, estando correctamente parametrizados y entrenados bajo diversos escenarios de mercado, pueden ser una buena herramienta para ayudar a los inversores, tanto expertos como noveles, a gestionar mejor sus portafolios y horizontes temporales de inversión.
+
+Respecto a los resultados de los distintos algoritmos, primeramente se puede descartar el modelo de Markowitz pues, como se ha mostrado en la \cref{fig:frontera_eficiente_Rf} y la \cref{fig:frontera_eficiente_Rf_media}, las situaciones de mercado en las que se le exige a la renta variable un nivel determinado de \textit{Equity Risk Premium}, teniendo la tasa libre de riesgo a niveles muy elevados, el resultado del modelo no es aplicable en la práctica. En consecuencia, si el modelo no es válido para el período analizado, puede no serlo para otros, pues depende de hipótesis que el mercado incumple con relativa frecuencia. 
+
+En cuanto a la comparación entre la cartera de mercado del modelo de Black-Litterman y la optimizada con las opiniones, se concluye que el modelo es válido, óptimo y aplicable en escenarios prácticos, pues permite, de forma sencilla, plasmar las opiniones del inversor o, de forma retroactiva, analizar el desempeño de la cartera creada y evaluar, en consecuencia, la calidad de las opiniones. 
+
+A pesar de ello, cabe destacar que durante la redacción de las conclusiones y la revisión del trabajo, el autor identificó un posible error conceptual relacionado con la tasa libre de riesgo empleada ($R_f$), que afecta tanto a los modelos de Black-Litterman como de Markowitz. En este caso, se utilizó el \textit{T-Bill} estadounidense a 3 meses (\texttt{\$\textasciicircum \$IRX}), mientras que las predicciones realizadas tienen un horizonte temporal de 1 año. Esto implica asumir que tanto los cupones como el principal del bono serán reinvertidos a la misma tasa durante ese periodo, manteniendo así una TIR constante. Sin embargo, dado que se trata de una predicción a 1 año, habría sido más apropiado utilizar el bono a 1 año, que coincide con el horizonte temporal estudiado, o incluso el bono a 10 años, que es un estándar ampliamente aceptado en la industria financiera.
+
+Aun así, las consecuencias de emplear la tasa libre de riesgo a 3 meses no tienen graves implicaciones prácticas, pero sí sería posible que, en escenarios de aumentos o disminuciones drásticas de los tipos de interés, pudieran observarse leves diferencias en los resultados.
+
+Por otro lado, respecto a la implementación del modelo y su optimización, esta ha sido un reto. Por una parte, el funcionamiento interno de las librerías más comúnmente utilizadas, como \texttt{PortfolioAnalytics} o \texttt{quantport}, no disponen de funciones útiles para la implementación, pues todas dependen de los rendimientos históricos de los activos. Además, librerías como \texttt{PerformanceAnalytics}, que permiten estudiar el comportamiento de las carteras, tampoco se han podido implementar por la diferencia en la estructura de los resultados: mientras las librerías demandan portafolios en ciertos objetos como ''fPortfolio'', los resultados obtenidos son vectores o matrices. Así pues, tal y como se ha explicado en la \cref{Optimización solve} \hyperref[Optimización solve]{Optimización con solve.QP}, se ha desarrollado un algoritmo para la construcción de las carteras. Asimismo, se han creado algoritmos para los gráficos de la evolución de los pesos en las fronteras eficientes, tratando de simular la estructura visual de los resultados que se obtendrían con \texttt{weightsplot} de la librería \texttt{fPortfolio} (Ver \cref{fig:frontera_eficiente_Rf} y \cref{fig:frontera_eficiente_Rf_media}). También se han creado dos algoritmos para la evaluación de las carteras en el \textit{backtesting} y el cálculo de las rentabilidades de las carteras con y sin rebalanceo, así como los gráficos de la evolución de los pesos en las carteras, la evolución del rendimiento de estas y los distintos parámetros para analizar las carteras.
+
+Por otro lado, el algoritmo de Black-Litterman depende de que $\Sigma$ sea positiva definida, es decir, que todos los valores de $\Sigma$ sean positivos, pues el algoritmo requiere de la inversión de $\Sigma$ para llevarse a cabo. En este trabajo se ha aplicado, como mecanismo automatizado, el método de Ledoit-Wolf para garantizar que se cumple este requisito, única y estrictamente en el caso de que algún valor fuera 0 o negativo. Aun así, dado que todas las covarianzas de los activos seleccionados son positivas, no se ha hecho uso del método de Ledoit-Wolf.
+
+Por último, el estadístico de Gerber no ha mostrado mejoras en su aplicación para las carteras de mercado, mientras que ha mejorado ligeramente el IHH de la cartera óptima de Black-Litterman. Aun así, no se considera que sea realmente una mejora, pues dicha mejora se produce al aplicar una $c = 0.9$, lo cual implica asumir una independencia casi total entre los activos. Este supuesto se aleja significativamente de la realidad en la mayoría de los escenarios reales y puede ser especialmente peligroso en escenarios extremos, como durante crisis financieras, donde las correlaciones entre activos suelen aumentar de manera notable.
+
+\clearpage
+
+
+
+
+\section{FUTURAS AMPLIACIONES}
+
+Este trabajo estudia la EMT y analiza las diferencias entre el modelo de Markowitz y el modelo de Black-Litterman, centrándose en el segundo y estudiando el impacto de las opiniones en los pesos de los activos en cartera. Una vez finalizado, se considera que existen diversas vías interesantes con las que se podría seguir este trabajo.
+
+Por una parte, cabría estudiar el cambio de $\mu_{BL}$, $\Sigma_{BL}$ y de la frontera eficiente en base a los cambios de $\tau$, tal y como proponen He y Litterman. Además, se podría tratar de analizar el impacto de diferentes $\Omega$, utilizando otros métodos de cálculo, tal y como propone Walters. Además, cabría estudiar si la calibración de $\lambda$ para adaptarse al perfil de riesgo del inversor tiene sentido práctico y, en ese caso, evaluar el impacto de los cambios de $\lambda$ en los resultados.
+
+Por otro lado, sería de interés analizar los cambios en $\Sigma$ implementando, de forma práctica, el algoritmo de Ledoit-Wolf para poder trabajar con valores extremos y, además, incorporar métodos de penalización como Tikhonov o Lasso para regular los pesos de los portafolios, y facilitar ajustes de pesos ante cambios repentinos de mercado.
+
+Asimismo, también sería de interés analizar el impacto en las carteras de la modificación de $P$ y $Q$ en la frontera eficiente, y cómo los pesos de las distintas carteras se ven modificados a lo largo de la frontera, así como las rentabilidades percibidas en el período de estudio para la comprobación de las predicciones del analista.
+
+También sería interesante aplicar el estadístico de Gerber en estos casos para analizar si los resultados mejoran dependiendo de la $c$ empleada o si, por el contrario, los resultados son similares a los de este trabajo.
+
+En cuanto a la presentación de los resultados, sería muy conveniente la automatización de procesos. Para ello, se podría usar un display interactivo de \texttt{Shiny} para la incorporación de los activos deseados, el horizonte temporal de estudio y la comprobación de hipótesis, así como las opiniones del inversor y la confianza que tiene en dichas opiniones, para así poder visualizar los resultados de forma sencilla y óptima.
+
+Por último, otra línea de investigación interesante sería el estudio de la eficiencia de mercado tanto en el corto como en el largo plazo, en la línea de trabajo de Lo y MacKinlay (1999), a través de métodos como el exponente de Hurst, un indicador que permite evaluar la presencia de tendencias persistentes o reversiones en series temporales financieras, así como los períodos en los que el mercado sigue un paseo aleatorio, proporcionando así información sobre la dinámica y la previsibilidad del mercado, y poder así construir algoritmos de \textit{trading} automatizados en base a dichas tendencias.
+
+
+\clearpage
+
+\shipout\null
+
+\chapter{BIBLIOGRAFÍA}
+
+\printbibliography[heading=none]
+
+\end{document}
